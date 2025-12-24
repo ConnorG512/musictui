@@ -1,6 +1,12 @@
-#include <print>
+#include <ncurses.h>
 
 auto main() -> int
 {
-  std::println("Hello world!");
+  initscr();
+  printw("Hello Ncurses!");
+  refresh();
+  getch();
+  endwin();
+
+  return 0;
 }
