@@ -15,6 +15,8 @@
         ccls
         cmake
         ncurses
+        openal
+        ffmpeg-full
       ];
 
       shellHook = ''
