@@ -26,28 +26,31 @@ set(LIBS
 )
 
 find_library(NCURSES_LIB ncursesw)
-target_link_libraries(${EXECUTABLE_NAME} ${NCURSES_LIB})
 find_path(NCURSES_INC ncurses.h)
 
 find_library(OPENAL_LIB openal)
-target_link_libraries(${EXECUTABLE_NAME} ${OPENAL_LIB})
 find_path(OPENAL_INC AL/al.h)
 
 find_library(AVCODEC_LIB avcodec)
-target_link_libraries(${EXECUTABLE_NAME} ${AVCODEC_LIB})
 find_path(AVCODEC_INC libavcodec/avcodec.h)
 
 find_library(AVFORMAT_LIB avformat)
-target_link_libraries(${EXECUTABLE_NAME} ${AVFORMAT_LIB})
 find_path(AVFORMAT_INC libavformat/avformat.h)
 
 find_library(AVUTIL_LIB avutil)
-target_link_libraries(${EXECUTABLE_NAME} ${AVUTIL_LIB})
 find_path(AVUTIL_INC libavutil/avutil.h)
 
 find_library(SWRESAMPLE_LIB swresample)
-target_link_libraries(${EXECUTABLE_NAME} ${SWRESAMPLE_LIB})
 find_path(SWRESAMPLE_INC libswresample/swresample.h)
+
+target_link_libraries(${EXECUTABLE_NAME} 
+  ${AVFORMAT_LIB}
+  ${AVCODEC_LIB}
+  ${AVUTIL_LIB}
+  ${SWRESAMPLE_LIB}
+  ${OPENAL_LIB}
+  ${NCURSES_LIB}
+)
 
 target_include_directories(${EXECUTABLE_NAME} PRIVATE 
   "${CMAKE_SOURCE_DIR}/include"
