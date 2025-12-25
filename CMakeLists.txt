@@ -15,10 +15,7 @@ add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 target_compile_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined -ggdb)
 target_link_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined)
 
-target_include_directories(${EXECUTABLE_NAME} PRIVATE 
-  "${CMAKE_SOURCE_DIR}/include"
-)
-
+# Found with "nix eval --raw nixpkgs<target>"
 set(LIBS
   ncursesw
   openal
@@ -28,33 +25,39 @@ set(LIBS
   swresample
 )
 
-foreach(lib IN LISTS LIBS)
-  message("Adding library ${lib}")
-  find_library(FOUND_LIB ${lib})
-  target_link_libraries(${EXECUTABLE_NAME} PRIVATE
-    ${FOUND_LIB}
-  )
-endforeach()
+find_library(NCURSES_LIB ncursesw)
+target_link_libraries(${EXECUTABLE_NAME} ${NCURSES_LIB})
+find_path(NCURSES_INC ncurses.h)
 
-set (INC_PATHS
-  ncurses.h
-  AL/al.h
-  libavcodec/avcodec.h
-  libavformat/avformat.h
-  libavutil/avutil.h
-  libswresample/swresample.h
+find_library(OPENAL_LIB openal)
+target_link_libraries(${EXECUTABLE_NAME} ${OPENAL_LIB})
+find_path(OPENAL_INC AL/al.h)
+
+find_library(AVCODEC_LIB avcodec)
+target_link_libraries(${EXECUTABLE_NAME} ${AVCODEC_LIB})
+find_path(AVCODEC_INC libavcodec/avcodec.h)
+
+find_library(AVFORMAT_LIB avformat)
+target_link_libraries(${EXECUTABLE_NAME} ${AVFORMAT_LIB})
+find_path(AVFORMAT_INC libavformat/avformat.h)
+
+find_library(AVUTIL_LIB avutil)
+target_link_libraries(${EXECUTABLE_NAME} ${AVUTIL_LIB})
+find_path(AVUTIL_INC libavutil/avutil.h)
+
+find_library(SWRESAMPLE_LIB swresample)
+target_link_libraries(${EXECUTABLE_NAME} ${SWRESAMPLE_LIB})
+find_path(SWRESAMPLE_INC libswresample/swresample.h)
+
+target_include_directories(${EXECUTABLE_NAME} PRIVATE 
+  "${CMAKE_SOURCE_DIR}/include"
+  ${NCURSES_INC}
+  ${OPENAL_INC}
+  ${AVCODEC_INC}
+  ${AVFORMAT_INC}
+  ${AVUTIL_INC}
+  ${SWRESAMPLE_INC}
 )
 
-foreach(inc IN LISTS INC_PATHS)
-  message("Finding include: ${inc}")
-  find_path(INC_RESULT ${inc})
-  if(NOT INC_RESULT)
-    message(FATAL_ERROR "${inc} could not be found!")
-  endif()
-  target_include_directories(${EXECUTABLE_NAME} PRIVATE
-    ${inc}
-  )
-endforeach()
-
-
 install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin)
+
