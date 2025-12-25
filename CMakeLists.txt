@@ -25,38 +25,22 @@ set(LIBS
   swresample
 )
 
-find_library(NCURSES_LIB ncursesw)
-target_link_libraries(${EXECUTABLE_NAME} ${NCURSES_LIB})
-find_path(NCURSES_INC ncurses.h)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(NCURSES_PKG REQUIRED
+  ncursesw
+)
 
-find_library(OPENAL_LIB openal)
-target_link_libraries(${EXECUTABLE_NAME} ${OPENAL_LIB})
-find_path(OPENAL_INC AL/al.h)
-
-find_library(AVCODEC_LIB avcodec)
-target_link_libraries(${EXECUTABLE_NAME} ${AVCODEC_LIB})
-find_path(AVCODEC_INC libavcodec/avcodec.h)
-
-find_library(AVFORMAT_LIB avformat)
-target_link_libraries(${EXECUTABLE_NAME} ${AVFORMAT_LIB})
-find_path(AVFORMAT_INC libavformat/avformat.h)
-
-find_library(AVUTIL_LIB avutil)
-target_link_libraries(${EXECUTABLE_NAME} ${AVUTIL_LIB})
-find_path(AVUTIL_INC libavutil/avutil.h)
-
-find_library(SWRESAMPLE_LIB swresample)
-target_link_libraries(${EXECUTABLE_NAME} ${SWRESAMPLE_LIB})
-find_path(SWRESAMPLE_INC libswresample/swresample.h)
+target_link_libraries(${EXECUTABLE_NAME} PRIVATE
+  ${NCURSES_PKG_LIBRARIES}
+)
 
 target_include_directories(${EXECUTABLE_NAME} PRIVATE 
   "${CMAKE_SOURCE_DIR}/include"
-  ${NCURSES_INC}
-  ${OPENAL_INC}
-  ${AVCODEC_INC}
-  ${AVFORMAT_INC}
-  ${AVUTIL_INC}
-  ${SWRESAMPLE_INC}
+  ${NCURSES_PKG_INCLUDE_DIRS}
+)
+
+target_compile_options(${EXECUTABLE_NAME} PRIVATE 
+  ${FFMPEG_CFLAGS_OTHER}
 )
 
 install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin)
