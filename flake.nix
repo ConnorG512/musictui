@@ -14,6 +14,8 @@
       packages = with pkgs; [
         ccls
         cmake
+        pkg-config
+
         ncurses
         openal
         ffmpeg-full
