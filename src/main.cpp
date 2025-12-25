@@ -12,8 +12,12 @@ auto main(int argc, const char* argv[]) -> int
 
   printw("%s", "MusicTUI!");
   
-  if(argv[1] == nullptr)
-    throw std::runtime_error("No music path provided!");
+  if(argc < 2)
+  {
+    std::println("No music path provided!");
+    endwin();
+    return -1;
+  }
   
   auto character {0};
   while((character = getch()) != 'q')
