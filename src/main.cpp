@@ -39,8 +39,13 @@ auto main(int argc, const char* argv[]) -> int
   while((character = getch()) != 'q')
   {
     if(character == KEY_F(1))
-      printw("F1 has been pressed!\n");
-    
+    {
+      printw("%s", std::format("Volume: {}", playing_track.track_volume.decreaseVolume()).c_str());
+    }
+    if(character == KEY_F(2))
+    {
+      printw("%s", std::format("Volume: {}", playing_track.track_volume.increaseVolume()).c_str());
+    }
     refresh();
   }
 
