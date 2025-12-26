@@ -35,7 +35,7 @@ auto main(int argc, const char* argv[]) -> int
   initscr();
   keypad(stdscr, TRUE);
 
-  printw("%s", std::format("playing:  {}", argv[1]).c_str());
+  printw("%s", std::format("playing:  {}", music_path).c_str());
   
   auto character {0};
   while((character = getch()) != 'q')
