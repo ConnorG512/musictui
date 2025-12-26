@@ -31,21 +31,11 @@ auto main(int argc, const char* argv[]) -> int
     return -1;
   }
 
-  // Open file:
-  const auto song_open {open(music_path, O_RDONLY)};
-  if (song_open == -1)
-  {
-    std::println("No music path provided! Error: {}", strerror(errno));
-    endwin();
-    return -1;
-  }
-  
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
 
-  printw("%s", "MusicTUI!");
-  
+  printw("%s", std::format("playing:  {}", argv[1]).c_str());
   
   auto character {0};
   while((character = getch()) != 'q')
@@ -58,7 +48,5 @@ auto main(int argc, const char* argv[]) -> int
   
   ma_engine_uninit(&engine);
   endwin();
-
-  close(song_open);
   return 0;
 }
