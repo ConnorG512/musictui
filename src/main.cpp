@@ -1,4 +1,5 @@
 #include "audio/engine.hpp"
+#include "audio/volume.hpp"
 
 #include <ncurses.h>
 #include <format>
@@ -22,7 +23,16 @@ auto main(int argc, const char* argv[]) -> int
   const char * music_path {argv[1]};
   
   Audio::Engine audio_engine{};
-  
+  ma_sound playing_track{};
+  ma_sound_init_from_file(
+      audio_engine.ptr(), 
+      music_path, 
+      0, 
+      nullptr, 
+      nullptr, 
+      &playing_track 
+  );
+  Audio::Volume volume_instance{playing_track};
   ma_engine_play_sound(audio_engine.ptr(), music_path, nullptr);
   
   // Main Loop:
@@ -40,6 +50,7 @@ auto main(int argc, const char* argv[]) -> int
     refresh();
   }
   
+  ma_sound_uninit(&playing_track);
   endwin();
   return 0;
 }
