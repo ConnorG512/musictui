@@ -21,13 +21,20 @@ pkg_check_modules(NCURSES_PKG REQUIRED
   ncursesw
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(MINIAUDIO_PKG REQUIRED
+  miniaudio
+)
+
 target_link_libraries(${EXECUTABLE_NAME} PRIVATE
   ${NCURSES_PKG_LIBRARIES}
+  ${MINIAUDIO_PKG_LIBRARIES}
 )
 
 target_include_directories(${EXECUTABLE_NAME} PRIVATE 
   "${CMAKE_SOURCE_DIR}/include"
   ${NCURSES_PKG_INCLUDE_DIRS}
+  ${MINIAUDIO_PKG_INCLUDE_DIRS}
 )
 
 target_compile_options(${EXECUTABLE_NAME} PRIVATE 
