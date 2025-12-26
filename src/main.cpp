@@ -8,6 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <miniaudio/miniaudio.h>
 
 auto main(int argc, const char* argv[]) -> int
 {
@@ -18,9 +19,18 @@ auto main(int argc, const char* argv[]) -> int
     endwin();
     return -1;
   }
-
   const char * music_path {argv[1]};
   
+  // Mini Audio
+  ma_engine engine{};
+  ma_result result {ma_engine_init(nullptr, &engine)};
+  if(result != MA_SUCCESS)
+  {
+    std::println("Failed to create miniaudio result!");
+    endwin();
+    return -1;
+  }
+
   // Open file:
   const auto song_open {open(music_path, O_RDONLY)};
   if (song_open == -1)
