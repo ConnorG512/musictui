@@ -40,11 +40,11 @@ auto main(int argc, const char* argv[]) -> int
   {
     if(character == KEY_F(1))
     {
-      playing_track.track_volume.decreaseVolume();
+      printw("%s", std::format("Volume: {}", playing_track.track_volume.decreaseVolume()).c_str());
     }
     if(character == KEY_F(2))
     {
-      playing_track.track_volume.increaseVolume();
+      printw("%s", std::format("Volume: {}", playing_track.track_volume.increaseVolume()).c_str());
     }
     refresh();
   }
