@@ -3,7 +3,6 @@
 #include <string>
 #include <print>
 #include <cassert>
-#include <AL/al.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
