@@ -16,15 +16,6 @@ target_compile_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined -
 target_link_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined)
 
 # Found with "nix eval --raw nixpkgs<target>"
-set(LIBS
-  ncursesw
-  openal
-  avcodec
-  avformat
-  avutil
-  swresample
-)
-
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(NCURSES_PKG REQUIRED
   ncursesw
