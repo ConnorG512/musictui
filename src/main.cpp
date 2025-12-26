@@ -1,5 +1,6 @@
 #include "audio/engine.hpp"
 #include "audio/volume.hpp"
+#include "track_instance.hpp"
 
 #include <ncurses.h>
 #include <format>
@@ -23,7 +24,11 @@ auto main(int argc, const char* argv[]) -> int
   const char * music_path {argv[1]};
   
   Audio::Engine audio_engine{};
-  
+  TrackInstance playing_track (music_path, audio_engine);
+
+  // Play sound
+  ma_sound_start(&playing_track.ref());
+
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
@@ -38,8 +43,7 @@ auto main(int argc, const char* argv[]) -> int
     
     refresh();
   }
-  
-  ma_sound_uninit(&playing_track);
+
   endwin();
   return 0;
 }

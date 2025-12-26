@@ -18,4 +18,6 @@ class TrackInstance
 
   public:
     Audio::Volume track_volume{current_track_};
+    
+    auto ref() noexcept -> ma_sound&;
 };

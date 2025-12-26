@@ -31,3 +31,8 @@ auto TrackInstance::createTrack(const char* track_path, Audio::Engine& engine) c
 
   return track;
 }
+
+auto TrackInstance::ref() noexcept -> ma_sound& 
+{
+  return current_track_;
+}
