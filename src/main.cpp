@@ -31,6 +31,8 @@ auto main(int argc, const char* argv[]) -> int
     return -1;
   }
 
+  ma_engine_play_sound(&engine, music_path, nullptr);
+
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
