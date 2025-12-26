@@ -12,7 +12,7 @@ Audio::Engine::Engine()
   }
 }
 
-auto Audio::Engine::ptr() const noexcept -> const ma_engine* 
+auto Audio::Engine::ptr() noexcept -> ma_engine* 
 {
   return &engine_;
 }

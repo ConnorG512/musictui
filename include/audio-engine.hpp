@@ -9,7 +9,7 @@ class Engine
 {
   public:
     Engine();
-    auto ptr() const noexcept -> const ma_engine*;
+    auto ptr() noexcept -> ma_engine*;
 
   private:
     ma_engine engine_ {}; 
