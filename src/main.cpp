@@ -12,6 +12,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <locale.h>
+#include <cwchar>
 
 struct ScreenPos {
   int x {0};
@@ -26,6 +28,10 @@ auto main(int argc, const char* argv[]) -> int
     std::println("Invalid path to file!");
     return -1;
   }
+  
+  // Enabling all localisation
+  setlocale(LC_ALL, "");
+
   const char * music_path {argv[1]};
   
   Audio::Engine audio_engine{};
