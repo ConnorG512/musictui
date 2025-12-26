@@ -9,10 +9,10 @@ class Engine
 {
   public:
     Engine();
-    auto ptr() const noexcept -> ma_engine*;
+    auto ptr() const noexcept -> const ma_engine*;
 
   private:
-    std::unique_ptr<ma_engine, decltype(&ma_engine_uninit)> engine_ {nullptr, &ma_engine_uninit}; 
+    ma_engine engine_ {}; 
 };
 }
 
