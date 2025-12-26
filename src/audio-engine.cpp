@@ -12,7 +12,14 @@ Audio::Engine::Engine()
   }
 }
 
+Audio::Engine::~Engine()
+{
+  ma_engine_uninit(&engine_);
+}
+
 auto Audio::Engine::ptr() noexcept -> ma_engine* 
 {
   return &engine_;
 }
+
+
