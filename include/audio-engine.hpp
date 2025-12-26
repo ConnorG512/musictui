@@ -8,7 +8,7 @@ namespace Audio
 class Engine 
 {
   public:
-    Engine();
+    Engine() = default;
 
   private:
     std::unique_ptr<ma_engine, decltype(&ma_engine_uninit)> engine_ {nullptr, &ma_engine_uninit}; 
