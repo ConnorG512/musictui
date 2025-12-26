@@ -7,7 +7,7 @@
 class TrackInstance 
 {
   public: 
-    TrackInstance(const char* track_path);
+    explicit TrackInstance(const char* track_path);
     ~TrackInstance();
   
   private:
