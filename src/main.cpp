@@ -8,6 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <miniaudio/miniaudio.h>
 
 auto main(int argc, const char* argv[]) -> int
 {
@@ -18,24 +19,25 @@ auto main(int argc, const char* argv[]) -> int
     endwin();
     return -1;
   }
-
   const char * music_path {argv[1]};
   
-  // Open file:
-  const auto song_open {open(music_path, O_RDONLY)};
-  if (song_open == -1)
+  // Mini Audio
+  ma_engine engine{};
+  ma_result result {ma_engine_init(nullptr, &engine)};
+  if(result != MA_SUCCESS)
   {
-    std::println("No music path provided! Error: {}", strerror(errno));
+    std::println("Failed to create miniaudio result!");
     endwin();
     return -1;
   }
-  
+
+  ma_engine_play_sound(&engine, music_path, nullptr);
+
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
 
-  printw("%s", "MusicTUI!");
-  
+  printw("%s", std::format("playing:  {}", music_path).c_str());
   
   auto character {0};
   while((character = getch()) != 'q')
@@ -45,9 +47,8 @@ auto main(int argc, const char* argv[]) -> int
     
     refresh();
   }
-
+  
+  ma_engine_uninit(&engine);
   endwin();
-
-  close(song_open);
   return 0;
 }
