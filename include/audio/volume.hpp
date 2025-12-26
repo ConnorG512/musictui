@@ -13,7 +13,7 @@ class Volume
 
   private:
     ma_sound sound_instance_{};
-    float current_volume_{0.0f};
+    float current_volume_{0.5f};
     float volume_increment_{0.1f};
 };
 }
