@@ -7,7 +7,8 @@ namespace Audio
 class Volume
 {
   public: 
-    Volume(const ma_sound &sound);
+    Volume(ma_sound &sound);
+
     auto increaseVolume() noexcept -> float;
     auto decreaseVolume() noexcept -> float;
 
