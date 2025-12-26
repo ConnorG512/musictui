@@ -14,10 +14,9 @@
 auto main(int argc, const char* argv[]) -> int
 {
   // Get Music File
-  if(argc < 2)
+  if(argc != 2)
   {
-    std::println("No music path provided!");
-    endwin();
+    std::println("Invalid path to file!");
     return -1;
   }
   const char * music_path {argv[1]};
