@@ -55,7 +55,8 @@ auto main(int argc, const char* argv[]) -> int
     
     refresh();
   }
-
+  
+  ma_engine_uninit(&engine);
   endwin();
 
   close(song_open);
