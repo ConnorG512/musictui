@@ -40,6 +40,8 @@ auto main(int argc, const char* argv[]) -> int
   {
     if(character == KEY_F(1))
       printw("F1 has been pressed!\n");
+    if(character == KEY_F(2))
+      printw("F1 has been pressed!\n");
     
     refresh();
   }
