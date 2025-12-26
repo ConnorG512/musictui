@@ -33,10 +33,10 @@ auto main(int argc, const char* argv[]) -> int
   setlocale(LC_ALL, "");
   
   const char * music_path {argv[1]};
-
+  
   wchar_t wide_buffer [2048];
   mbstowcs(wide_buffer, std::format("playing:  {}", music_path).c_str(), 2048);
-  
+
   Audio::Engine audio_engine{};
   TrackInstance playing_track (music_path, audio_engine);
 
