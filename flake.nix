@@ -17,8 +17,7 @@
         pkg-config
 
         ncurses
-        openal
-        ffmpeg-full
+        miniaudio
       ];
 
       shellHook = ''
