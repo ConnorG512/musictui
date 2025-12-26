@@ -1,3 +1,5 @@
+#include "audio-engine.hpp"
+
 #include <ncurses.h>
 #include <format>
 #include <string>
@@ -20,18 +22,10 @@ auto main(int argc, const char* argv[]) -> int
   }
   const char * music_path {argv[1]};
   
-  // Mini Audio
-  ma_engine engine{};
-  ma_result result {ma_engine_init(nullptr, &engine)};
-  if(result != MA_SUCCESS)
-  {
-    std::println("Failed to create miniaudio result!");
-    endwin();
-    return -1;
-  }
-
-  ma_engine_play_sound(&engine, music_path, nullptr);
-
+  Audio::Engine audio_engine{};
+  
+  ma_engine_play_sound(audio_engine.ptr(), music_path, nullptr);
+  
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
@@ -47,7 +41,6 @@ auto main(int argc, const char* argv[]) -> int
     refresh();
   }
   
-  ma_engine_uninit(&engine);
   endwin();
   return 0;
 }
