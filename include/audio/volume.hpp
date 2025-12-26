@@ -8,8 +8,8 @@ class Volume
 {
   public: 
     Volume(const ma_sound &sound);
-    auto increaseVolume() noexcept -> void;
-    auto decreaseVolume() noexcept -> void;
+    auto increaseVolume() noexcept -> float;
+    auto decreaseVolume() noexcept -> float;
 
   private:
     ma_sound sound_instance_{};

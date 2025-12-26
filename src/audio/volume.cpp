@@ -7,14 +7,16 @@ Audio::Volume::Volume(const ma_sound &sound)
   ma_sound_set_volume(&sound_instance_, current_volume_);
 }
 
-auto Audio::Volume::increaseVolume() noexcept -> void
+auto Audio::Volume::increaseVolume() noexcept -> float
 {
   current_volume_ += volume_increment_;
   ma_sound_set_volume(&sound_instance_, current_volume_);
+  return current_volume_;
 }
 
-auto Audio::Volume::decreaseVolume() noexcept -> void
+auto Audio::Volume::decreaseVolume() noexcept -> float
 {
   current_volume_ -= volume_increment_;
   ma_sound_set_volume(&sound_instance_, current_volume_);
+  return current_volume_;
 }
