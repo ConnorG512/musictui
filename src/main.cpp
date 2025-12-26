@@ -13,6 +13,11 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
+struct ScreenPos {
+  int x {0};
+  int y {0};
+};
+
 auto main(int argc, const char* argv[]) -> int
 {
   // Get Music File
@@ -40,11 +45,11 @@ auto main(int argc, const char* argv[]) -> int
   {
     if(character == KEY_F(1))
     {
-      printw("%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.decreaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.decreaseVolume()).c_str());
     }
     if(character == KEY_F(2))
     {
-      printw("%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.increaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.increaseVolume()).c_str());
     }
     refresh();
   }
