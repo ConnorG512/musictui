@@ -49,3 +49,13 @@ auto TrackInstance::pauseTrack() noexcept -> void
   //track_position.storeCurrentPCMPos();
   ma_sound_stop(&current_track_);
 }
+
+auto seekForward() noexcept -> void 
+{
+
+}
+
+auto seekBackward() noexcept -> void 
+{
+
+}
