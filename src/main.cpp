@@ -74,6 +74,10 @@ auto main(int argc, const char* argv[]) -> int
     {
       playing_track.seekForward();
     }
+    if(character == KEY_F(7))
+    {
+      playing_track.stopTrack();
+    }
     refresh();
   }
 
