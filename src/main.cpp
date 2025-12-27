@@ -12,6 +12,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <locale.h>
+#include <cwchar>
+
+struct ScreenPos {
+  int x {0};
+  int y {0};
+};
 
 auto main(int argc, const char* argv[]) -> int
 {
@@ -21,10 +28,14 @@ auto main(int argc, const char* argv[]) -> int
     std::println("Invalid path to file!");
     return -1;
   }
-  const char * music_path {argv[1]};
+  
+  // Enabling all localisation
+  setlocale(LC_ALL, "");
+  
+  const std::string music_path {argv[1]};
   
   Audio::Engine audio_engine{};
-  TrackInstance playing_track (music_path, audio_engine);
+  TrackInstance playing_track (music_path.c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
@@ -32,19 +43,18 @@ auto main(int argc, const char* argv[]) -> int
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
-
-  printw("%s", std::format("playing:  {}", music_path).c_str());
+  printw("%s", music_path.c_str());
   
   auto character {0};
   while((character = getch()) != 'q')
   {
     if(character == KEY_F(1))
     {
-      printw("%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.decreaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.decreaseVolume()).c_str());
     }
     if(character == KEY_F(2))
     {
-      printw("%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.increaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.increaseVolume()).c_str());
     }
     refresh();
   }
