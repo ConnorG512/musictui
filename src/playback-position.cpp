@@ -28,3 +28,8 @@ auto PlaybackPosition::adjustCursorPos(const PositionDirection seek_type, const 
       pcm_position_ -= offset;
   }
 }
+
+auto PlaybackPosition::setPosition(ma_uint64 position) noexcept -> void
+{
+  ma_sound_seek_to_pcm_frame(&current_track_instance_, position);
+}
