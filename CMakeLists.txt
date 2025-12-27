@@ -12,6 +12,7 @@ set(SOURCE_FILES
   src/playback-position.cpp
   src/audio/engine.cpp
   src/audio/volume.cpp
+  src/audio/device.cpp
 )
 
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})

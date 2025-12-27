@@ -1,5 +1,6 @@
 #include "audio/engine.hpp"
 #include "audio/volume.hpp"
+#include "audio/device.hpp"
 #include "track_instance.hpp"
 
 #include <ncurses.h>
@@ -30,9 +31,10 @@ auto main(int argc, const char* argv[]) -> int
   
   const std::string music_path {argv[1]};
   
-  Audio::Engine audio_engine{};
+  Audio::Device device {};
+  Audio::Engine audio_engine {};
   TrackInstance playing_track (music_path.c_str(), audio_engine);
-
+  
   // Play sound
   ma_sound_start(&playing_track.ref());
 
@@ -40,7 +42,7 @@ auto main(int argc, const char* argv[]) -> int
   initscr();
   keypad(stdscr, TRUE);
   noecho();
-
+  
   printw("%s", music_path.c_str());
   
   auto character {0};

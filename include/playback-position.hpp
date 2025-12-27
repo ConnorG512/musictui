@@ -18,7 +18,7 @@ class PlaybackPosition
       forward, 
       backward,
     };
-    auto adjustCursorPos(const PositionDirection seek_type, const std::int32_t offset) noexcept -> void;
+    auto adjustCursorPos(const PositionDirection seek_type, const std::int32_t seconds = 3) noexcept -> void;
 
   private:
     ma_sound& current_track_instance_;
