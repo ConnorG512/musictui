@@ -40,13 +40,11 @@ auto TrackInstance::ref() noexcept -> ma_sound&
 
 auto TrackInstance::playTrack() noexcept -> void 
 {
-  //ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
   ma_sound_start(&current_track_);
 }
 
 auto TrackInstance::pauseTrack() noexcept -> void 
 {
-  //track_position.storeCurrentPCMPos();
   ma_sound_stop(&current_track_);
 }
 
