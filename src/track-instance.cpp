@@ -49,3 +49,23 @@ auto TrackInstance::pauseTrack() noexcept -> void
   //track_position.storeCurrentPCMPos();
   ma_sound_stop(&current_track_);
 }
+
+auto TrackInstance::stopTrack() noexcept -> void 
+{
+  ma_sound_stop(&current_track_);
+  track_position.setPosition(0);
+}
+
+auto TrackInstance::seekForward() noexcept -> void 
+{
+  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::forward, 30000);
+  ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
+  ma_sound_start(&current_track_);
+}
+
+auto TrackInstance::seekBackward() noexcept -> void 
+{
+  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::backward, 30000);
+  ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
+  ma_sound_start(&current_track_);
+}
