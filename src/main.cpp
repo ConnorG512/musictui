@@ -58,12 +58,12 @@ auto main(int argc, const char* argv[]) -> int
     }
     if(character == KEY_F(3))
     {
-      mvprintw(1, 0, "%s", "Pause button!");
+      playing_track.pauseTrack();
     }
     refresh();
     if(character == KEY_F(4))
     {
-      mvprintw(1, 0, "%s", "Play button!");
+      playing_track.playTrack();
     }
     refresh();
   }
