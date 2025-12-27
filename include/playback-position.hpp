@@ -11,6 +11,7 @@ class PlaybackPosition
     PlaybackPosition(ma_sound &track);
     auto storeCurrentPCMPos() noexcept -> void; 
     auto getPosition() const noexcept -> const ma_uint64&;
+    auto setPosition(ma_uint64 position) noexcept -> void;
 
     enum class PositionDirection 
     {
