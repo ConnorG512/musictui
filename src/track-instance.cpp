@@ -52,14 +52,14 @@ auto TrackInstance::pauseTrack() noexcept -> void
 
 auto TrackInstance::seekForward() noexcept -> void 
 {
-  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::forward, 3000);
+  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::forward, 30000);
   ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
   ma_sound_start(&current_track_);
 }
 
 auto TrackInstance::seekBackward() noexcept -> void 
 {
-  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::backward, 3000);
+  track_position.adjustCursorPos(PlaybackPosition::PositionDirection::backward, 30000);
   ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
   ma_sound_start(&current_track_);
 }
