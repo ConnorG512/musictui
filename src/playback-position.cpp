@@ -13,3 +13,18 @@ auto PlaybackPosition::getPosition() const noexcept -> const ma_uint64&
 {
   return pcm_position_;
 }
+
+auto PlaybackPosition::adjustCursorPos(const PositionDirection seek_type, const std::int32_t offset) noexcept -> void 
+{
+  storeCurrentPCMPos();
+  
+  if(seek_type == PositionDirection::forward)
+    pcm_position_ += offset;
+  else if(seek_type == PositionDirection::backward)
+  {
+    if(offset > pcm_position_)
+      pcm_position_ = 0;
+    else
+      pcm_position_ -= offset;
+  }
+}

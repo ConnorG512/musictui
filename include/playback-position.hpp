@@ -1,6 +1,7 @@
 #pragma once
 
 #include <miniaudio/miniaudio.h>
+#include <cstdint>
 
 class TrackInstance;
 
@@ -10,6 +11,13 @@ class PlaybackPosition
     PlaybackPosition(ma_sound &track);
     auto storeCurrentPCMPos() noexcept -> void; 
     auto getPosition() const noexcept -> const ma_uint64&;
+
+    enum class PositionDirection 
+    {
+      forward, 
+      backward,
+    };
+    auto adjustCursorPos(const PositionDirection seek_type, const std::int32_t offset) noexcept -> void;
 
   private:
     ma_sound& current_track_instance_;

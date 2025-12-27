@@ -24,4 +24,6 @@ class TrackInstance
     auto ref() noexcept -> ma_sound&;
     auto playTrack() noexcept -> void;
     auto pauseTrack() noexcept -> void;
+    auto seekForward() noexcept -> void;
+    auto seekBackward() noexcept -> void;
 };

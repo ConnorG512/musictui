@@ -43,6 +43,8 @@ auto main(int argc, const char* argv[]) -> int
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
+  noecho();
+
   printw("%s", music_path.c_str());
   
   auto character {0};
@@ -60,10 +62,17 @@ auto main(int argc, const char* argv[]) -> int
     {
       playing_track.pauseTrack();
     }
-    refresh();
     if(character == KEY_F(4))
     {
       playing_track.playTrack();
+    }
+    if(character == KEY_F(5))
+    {
+      playing_track.seekBackward();
+    }
+    if(character == KEY_F(6))
+    {
+      playing_track.seekForward();
     }
     refresh();
   }
