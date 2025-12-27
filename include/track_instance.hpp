@@ -19,7 +19,9 @@ class TrackInstance
 
   public:
     Audio::Volume track_volume{current_track_};
-    PlaybackPosition track_position{};
+    PlaybackPosition track_position;
     
     auto ref() noexcept -> ma_sound&;
+    auto playTrack() noexcept -> void;
+    auto pauseTrack() noexcept -> void;
 };
