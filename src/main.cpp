@@ -35,16 +35,6 @@ auto main(int argc, const char* argv[]) -> int
   Audio::Engine audio_engine {};
   TrackInstance playing_track (music_path.c_str(), audio_engine);
   
-  ma_uint32 track_sample_rate {};
-  ma_sound_get_data_format(
-      &playing_track.ref(), 
-      nullptr, 
-      nullptr,
-      &track_sample_rate, 
-      nullptr, 
-      0
-  );
-
   // Play sound
   ma_sound_start(&playing_track.ref());
 
@@ -53,7 +43,6 @@ auto main(int argc, const char* argv[]) -> int
   keypad(stdscr, TRUE);
   noecho();
   
-  printw("%d\n", track_sample_rate);
   printw("%s", music_path.c_str());
   
   auto character {0};
