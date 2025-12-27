@@ -60,10 +60,17 @@ auto main(int argc, const char* argv[]) -> int
     {
       playing_track.pauseTrack();
     }
-    refresh();
     if(character == KEY_F(4))
     {
       playing_track.playTrack();
+    }
+    if(character == KEY_F(5))
+    {
+      playing_track.seekBackward();
+    }
+    if(character == KEY_F(6))
+    {
+      playing_track.seekForward();
     }
     refresh();
   }
