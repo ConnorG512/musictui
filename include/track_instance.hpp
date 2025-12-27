@@ -2,6 +2,7 @@
 
 #include "audio/volume.hpp"
 #include "audio/engine.hpp"
+#include "playback-position.hpp"
 
 #include <miniaudio/miniaudio.h>
 
@@ -18,6 +19,9 @@ class TrackInstance
 
   public:
     Audio::Volume track_volume{current_track_};
+    PlaybackPosition track_position;
     
     auto ref() noexcept -> ma_sound&;
+    auto playTrack() noexcept -> void;
+    auto pauseTrack() noexcept -> void;
 };
