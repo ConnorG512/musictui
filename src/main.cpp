@@ -32,13 +32,10 @@ auto main(int argc, const char* argv[]) -> int
   // Enabling all localisation
   setlocale(LC_ALL, "");
   
-  const char * music_path {argv[1]};
+  const std::string music_path {argv[1]};
   
-  wchar_t wide_buffer [2048];
-  mbstowcs(wide_buffer, std::format("playing:  {}", music_path).c_str(), 2048);
-
   Audio::Engine audio_engine{};
-  TrackInstance playing_track (music_path, audio_engine);
+  TrackInstance playing_track (music_path.c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
@@ -46,8 +43,7 @@ auto main(int argc, const char* argv[]) -> int
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
-
-  mvaddwstr(0, 0, wide_buffer);
+  printw("%s", music_path.c_str());
   
   auto character {0};
   while((character = getch()) != 'q')
