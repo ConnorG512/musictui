@@ -2,7 +2,7 @@
 
 Audio::Volume::Volume(ma_sound &sound)
   : sound_instance_{sound}
-  , current_volume_{ma_sound_get_volume(&sound_instance_)} 
+  , current_volume_{0.3f} 
 {
   ma_sound_set_volume(&sound_instance_, current_volume_);
 }
