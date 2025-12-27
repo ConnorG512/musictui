@@ -56,6 +56,15 @@ auto main(int argc, const char* argv[]) -> int
     {
       mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str());
     }
+    if(character == KEY_F(3))
+    {
+      mvprintw(1, 0, "%s", "Pause button!");
+    }
+    refresh();
+    if(character == KEY_F(4))
+    {
+      mvprintw(1, 0, "%s", "Play button!");
+    }
     refresh();
   }
 
