@@ -9,5 +9,5 @@ class PlaybackPosition
     auto getPosition() const noexcept -> const ma_uint64&;
 
   private:
-    ma_uint64 pcm_position{0};
+    ma_uint64 pcm_position_{0};
 };
