@@ -50,11 +50,11 @@ auto main(int argc, const char* argv[]) -> int
   {
     if(character == KEY_F(1))
     {
-      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.decreaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", (playing_track.track_volume.decreaseVolume()) * 100).c_str());
     }
     if(character == KEY_F(2))
     {
-      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", playing_track.track_volume.increaseVolume()).c_str());
+      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str());
     }
     refresh();
   }
