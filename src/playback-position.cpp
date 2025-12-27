@@ -17,15 +17,41 @@ auto PlaybackPosition::getPosition() const noexcept -> const ma_uint64&
 auto PlaybackPosition::adjustCursorPos(const PositionDirection seek_type, const std::int32_t seconds) noexcept -> void 
 {
   storeCurrentPCMPos();
+  
+  ma_uint32 track_sample_rate {};
+  ma_sound_get_data_format(
+      &current_track_instance_, 
+      nullptr, 
+      nullptr,
+      &track_sample_rate, 
+      nullptr, 
+      0
+  );
+  
+  ma_uint64 total_track_len{};
+  ma_sound_get_length_in_pcm_frames(&current_track_instance_, &total_track_len);
 
+  const ma_uint64 seek_offset 
+  {
+    static_cast<ma_uint64>(track_sample_rate) *
+      static_cast<ma_uint64>(seconds)
+  };
+  
   if(seek_type == PositionDirection::forward)
-    pcm_position_ += offset;
+  {
+    if(pcm_position_ + seek_offset >= total_track_len)
+    {
+      pcm_position_ = total_track_len -1;
+    }
+    
+    pcm_position_ += seek_offset;
+  }
   else if(seek_type == PositionDirection::backward)
   {
-    if(offset > pcm_position_)
+    if(pcm_position_ - seek_offset < 0)
+    {
       pcm_position_ = 0;
-    else
-      pcm_position_ -= offset;
+    }
   }
 }
 
