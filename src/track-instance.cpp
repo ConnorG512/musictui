@@ -50,6 +50,12 @@ auto TrackInstance::pauseTrack() noexcept -> void
   ma_sound_stop(&current_track_);
 }
 
+auto TrackInstance::stopTrack() noexcept -> void 
+{
+  ma_sound_stop(&current_track_);
+  track_position.setPosition(0);
+}
+
 auto TrackInstance::seekForward() noexcept -> void 
 {
   track_position.adjustCursorPos(PlaybackPosition::PositionDirection::forward, 30000);
