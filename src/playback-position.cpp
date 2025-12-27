@@ -52,6 +52,7 @@ auto PlaybackPosition::adjustCursorPos(const PositionDirection seek_type, const 
     {
       pcm_position_ = 0;
     }
+    pcm_position_ -= seek_offset;
   }
 }
 
