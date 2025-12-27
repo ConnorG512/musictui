@@ -43,6 +43,8 @@ auto main(int argc, const char* argv[]) -> int
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
+  noecho();
+
   printw("%s", music_path.c_str());
   
   auto character {0};
