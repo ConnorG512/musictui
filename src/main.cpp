@@ -44,17 +44,24 @@ auto main(int argc, const char* argv[]) -> int
   UI::Window app_window{100, 20};
   app_window.drawTextToWindow("Now playing:", 1, 1);
   app_window.drawTextToWindow(music_path.c_str(), 1, 2);
+  app_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
+  app_window.drawTextToWindow(std::string{"Volume Down: F2"}.c_str(), 1, 4);
+  app_window.drawTextToWindow(std::string{"Pause: F3"}.c_str(), 1, 5);
+  app_window.drawTextToWindow(std::string{"Play: F4"}.c_str(), 1, 6);
+  app_window.drawTextToWindow(std::string{"Seek Backward: F5"}.c_str(), 1, 7);
+  app_window.drawTextToWindow(std::string{"Seek Forward: F6"}.c_str(), 1, 8);
+  app_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
 
   auto character {0};
   while((character = getch()) != 'q')
   {
     if(character == KEY_F(1))
     {
-      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", (playing_track.track_volume.decreaseVolume()) * 100).c_str());
+      app_window.drawTextToWindow(std::format("Volume: {:3.2f}%", (playing_track.track_volume.decreaseVolume()) * 100).c_str(), 1, 10);
     }
     if(character == KEY_F(2))
     {
-      mvprintw(1, 0, "%s", std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str());
+      app_window.drawTextToWindow(std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str(), 1, 10);
     }
     if(character == KEY_F(3))
     {
