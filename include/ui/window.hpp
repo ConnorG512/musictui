@@ -9,7 +9,7 @@ namespace UI
   {
     public:
       Window() = default;
-      ~Window();
+      ~Window() = default;
 
     private:
       auto createBoxedWindow() noexcept -> std::unique_ptr<WINDOW, decltype(&delwin)>;
