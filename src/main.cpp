@@ -47,14 +47,9 @@ auto main(int argc, const char* argv[]) -> int
   
   refresh();
   UI::Window app_window{100, 20};
+  app_window.drawTextToWindow("Now playing:", 1, 1);
+  app_window.drawTextToWindow(music_path.c_str(), 1, 2);
 
-  for(const auto& ch : std::string_view{"Playing:\n"})
-  {
-    addch(ch | A_BOLD | A_UNDERLINE);
-  }
-
-  printw("%s", music_path.c_str());
-  
   auto character {0};
   while((character = getch()) != 'q')
   {
