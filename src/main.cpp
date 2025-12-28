@@ -46,7 +46,7 @@ auto main(int argc, const char* argv[]) -> int
   noecho();
   
   refresh();
-  UI::Window app_window{30, 20};
+  UI::Window app_window{100, 20};
 
   for(const auto& ch : std::string_view{"Playing:\n"})
   {
