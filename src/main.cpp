@@ -2,6 +2,7 @@
 #include "audio/volume.hpp"
 #include "audio/device.hpp"
 #include "track_instance.hpp"
+#include "ui/window.hpp"
 
 #include <ncurses.h>
 #include <format>
@@ -11,6 +12,7 @@
 #include <sys/mman.h>
 #include <locale.h>
 #include <cwchar>
+#include <array>
 
 struct ScreenPos {
   int x {0};
@@ -43,6 +45,13 @@ auto main(int argc, const char* argv[]) -> int
   keypad(stdscr, TRUE);
   noecho();
   
+  UI::Window app_window{};
+
+  for(const auto& ch : std::string_view{"Playing:\n"})
+  {
+    addch(ch | A_BOLD | A_UNDERLINE);
+  }
+
   printw("%s", music_path.c_str());
   
   auto character {0};
