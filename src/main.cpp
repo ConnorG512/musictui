@@ -39,6 +39,7 @@ auto main(int argc, const char* argv[]) -> int
   initscr();
   keypad(stdscr, TRUE);
   noecho();
+  curs_set(0);
   
   refresh();
   UI::Window app_window{100, 20};
