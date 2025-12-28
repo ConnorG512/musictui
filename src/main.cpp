@@ -14,11 +14,6 @@
 #include <cwchar>
 #include <array>
 
-struct ScreenPos {
-  int x {0};
-  int y {0};
-};
-
 auto main(int argc, const char* argv[]) -> int
 {
   // Get Music File
