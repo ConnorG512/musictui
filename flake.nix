@@ -14,6 +14,7 @@
       packages = with pkgs; [
         ccls
         cmake
+        valgrind
         pkg-config
 
         ncurses
