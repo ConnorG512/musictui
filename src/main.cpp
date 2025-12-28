@@ -45,7 +45,8 @@ auto main(int argc, const char* argv[]) -> int
   keypad(stdscr, TRUE);
   noecho();
   
-  UI::Window app_window{};
+  UI::Window app_window{30, 20};
+  refresh();
 
   for(const auto& ch : std::string_view{"Playing:\n"})
   {
