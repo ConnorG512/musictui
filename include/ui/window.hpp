@@ -9,6 +9,7 @@ namespace UI
   {
     public:
       Window(const int x, const int y);
+      auto refreshWindow() const noexcept -> void;
 
     private:
       auto createBoxedWindow(const int x = 10, const int y = 20) noexcept 
