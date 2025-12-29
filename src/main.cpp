@@ -44,15 +44,15 @@ auto main(int argc, const char *argv[]) -> int
   refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
 
-  playback_window.drawTextToWindow("Now playing:", 1, 1);
-  playback_window.drawTextToWindow(music_path.c_str(), 1, 2);
-  playback_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
-  playback_window.drawTextToWindow(std::string{"Volume Up: F2"}.c_str(), 1, 4);
-  playback_window.drawTextToWindow(std::string{"Pause: F3"}.c_str(), 1, 5);
-  playback_window.drawTextToWindow(std::string{"Play: F4"}.c_str(), 1, 6);
-  playback_window.drawTextToWindow(std::string{"Seek Backward: F5"}.c_str(), 1, 7);
-  playback_window.drawTextToWindow(std::string{"Seek Forward: F6"}.c_str(), 1, 8);
-  playback_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
+  //playback_window.drawTextToWindow("Now playing:", 1, 1);
+  //playback_window.drawTextToWindow(music_path.c_str(), 1, 2);
+  //playback_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
+  //playback_window.drawTextToWindow(std::string{"Volume Up: F2"}.c_str(), 1, 4);
+  //playback_window.drawTextToWindow(std::string{"Pause: F3"}.c_str(), 1, 5);
+  //playback_window.drawTextToWindow(std::string{"Play: F4"}.c_str(), 1, 6);
+  //playback_window.drawTextToWindow(std::string{"Seek Backward: F5"}.c_str(), 1, 7);
+  //playback_window.drawTextToWindow(std::string{"Seek Forward: F6"}.c_str(), 1, 8);
+  //playback_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
 
   UI::Window contents_window{std::optional<std::pair<int, int>>(
       {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
