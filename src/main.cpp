@@ -25,6 +25,7 @@ auto main(int argc, const char *argv[]) -> int
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
+  start_color();
 
   const std::string music_path{argv[1]};
 
