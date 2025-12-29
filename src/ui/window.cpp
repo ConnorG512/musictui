@@ -2,8 +2,8 @@
 
 #include <cassert>
 
-UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy)
-    : window_instance_{createBoxedWindow(dimensions_xy)}
+UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy, std::pair<int, int> position_xy)
+    : window_instance_{createBoxedWindow(dimensions_xy, position_xy)}
 {
   refreshWindow();
 }

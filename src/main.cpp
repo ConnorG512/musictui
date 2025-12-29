@@ -54,6 +54,11 @@ auto main(int argc, const char *argv[]) -> int
   playback_window.drawTextToWindow(std::string{"Seek Forward: F6"}.c_str(), 1, 8);
   playback_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
 
+  UI::Window contents_window{std::optional<std::pair<int, int>>(
+      {getmaxx(stdscr), getmaxy(stdscr) / 3 * 2}),
+      {0, getmaxy(stdscr) / 3}
+  };
+  
   auto character{0};
   while ((character = getch()) != 'q')
   {
