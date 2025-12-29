@@ -42,7 +42,7 @@ auto main(int argc, const char* argv[]) -> int
   curs_set(0);
   
   refresh();
-  UI::Window app_window{100, 20};
+  UI::Window app_window{};
   app_window.drawTextToWindow("Now playing:", 1, 1);
   app_window.drawTextToWindow(music_path.c_str(), 1, 2);
   app_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
