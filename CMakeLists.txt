@@ -18,8 +18,8 @@ set(SOURCE_FILES
 
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 
-target_compile_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined -ggdb)
-target_link_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined)
+#target_compile_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined -ggdb)
+#target_link_options(${EXECUTABLE_NAME} PRIVATE -fsanitize=address,undefined)
 
 # Found with "nix eval --raw nixpkgs<target>"
 find_package(PkgConfig REQUIRED)
