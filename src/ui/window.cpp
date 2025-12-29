@@ -1,6 +1,6 @@
 #include "ui/window.hpp"
 
-UI::Window::Window(const int x, const int y)
+UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy)
   : window_instance_{createBoxedWindow(x, y)} 
 {
   refreshWindow();
@@ -15,10 +15,10 @@ auto UI::Window::drawTextToWindow(const char * message, int x, int y) const noex
   mvprintw(y, x, "%s", message);
 }
 
-auto UI::Window::createBoxedWindow(const int x, const int y) noexcept 
+auto UI::Window::createBoxedWindow(const std::optional<std::pair<int, int>> dimensions_xy) noexcept 
   -> std::unique_ptr<WINDOW, decltype(&delwin)> 
 {
-  WINDOW* created_window { newwin(y, x, 0, 0)};
+  WINDOW* created_window {newwin(y, x, 0, 0)};
   box(created_window, 0, 0);
   wrefresh(created_window);
   
