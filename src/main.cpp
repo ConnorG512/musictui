@@ -64,13 +64,11 @@ auto main(int argc, const char *argv[]) -> int
   {
     if (character == KEY_F(1))
     {
-      playback_window.drawTextToWindow(
-          std::format("Volume: {:3.2f}%", (playing_track.track_volume.decreaseVolume()) * 100).c_str(), 1, 10);
+      playing_track.track_volume.decreaseVolume();
     }
     if (character == KEY_F(2))
     {
-      playback_window.drawTextToWindow(
-          std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str(), 1, 10);
+      playing_track.track_volume.increaseVolume();
     }
     if (character == KEY_F(3))
     {
