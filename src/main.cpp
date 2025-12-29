@@ -41,7 +41,6 @@ auto main(int argc, const char *argv[]) -> int
   noecho();
   curs_set(0);
 
-  refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
 
   //playback_window.drawTextToWindow("Now playing:", 1, 1);
