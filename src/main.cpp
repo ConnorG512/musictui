@@ -46,7 +46,7 @@ auto main(int argc, const char* argv[]) -> int
   app_window.drawTextToWindow("Now playing:", 1, 1);
   app_window.drawTextToWindow(music_path.c_str(), 1, 2);
   app_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
-  app_window.drawTextToWindow(std::string{"Volume Down: F2"}.c_str(), 1, 4);
+  app_window.drawTextToWindow(std::string{"Volume Up: F2"}.c_str(), 1, 4);
   app_window.drawTextToWindow(std::string{"Pause: F3"}.c_str(), 1, 5);
   app_window.drawTextToWindow(std::string{"Play: F4"}.c_str(), 1, 6);
   app_window.drawTextToWindow(std::string{"Seek Backward: F5"}.c_str(), 1, 7);
