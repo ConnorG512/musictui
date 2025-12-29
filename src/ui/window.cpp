@@ -12,6 +12,7 @@ auto UI::Window::refreshWindow() const noexcept -> void
 {
   wrefresh(window_instance_.get());
 }
+
 auto UI::Window::drawTextToWindow(const char * message, int x, int y) const noexcept -> void 
 {
   mvprintw(y, x, "%s", message);
