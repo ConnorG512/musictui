@@ -43,7 +43,6 @@ auto main(int argc, const char* argv[]) -> int
   
   refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 3})};
-  UI::Window contents_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), (getmaxy(stdscr) / 3) * 2})};
 
   playback_window.drawTextToWindow("Now playing:", 1, 1);
   playback_window.drawTextToWindow(music_path.c_str(), 1, 2);
