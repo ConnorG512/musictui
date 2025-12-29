@@ -6,7 +6,4 @@ Audio::Device::Device()
   configuration_.sampleRate = 0;
 }
 
-auto Audio::Device::getConfiguration() const noexcept -> const ma_device_config&
-{
-  return configuration_;
-}
+auto Audio::Device::getConfiguration() const noexcept -> const ma_device_config & { return configuration_; }
