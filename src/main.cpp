@@ -55,8 +55,8 @@ auto main(int argc, const char *argv[]) -> int
   playback_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
 
   UI::Window contents_window{std::optional<std::pair<int, int>>(
-      {getmaxx(stdscr), getmaxy(stdscr) / 3 * 2}),
-      {0, getmaxy(stdscr) / 3}
+      {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
+      {0, getmaxy(stdscr) / 8}
   };
   
   auto character{0};
