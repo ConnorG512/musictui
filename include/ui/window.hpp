@@ -22,7 +22,6 @@ public:
          const std::pair<int, int> position_xy = {0,0});
 
   auto refreshWindow() const noexcept -> void;
-  auto drawTextToWindow(const char *message, int x = 0, int y = 0) const noexcept -> void;
   
   auto ptr() const noexcept -> WINDOW*;
   auto cptr() const noexcept -> const WINDOW*;
