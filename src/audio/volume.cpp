@@ -1,8 +1,6 @@
 #include "audio/volume.hpp"
 
-Audio::Volume::Volume(ma_sound &sound)
-  : sound_instance_{sound}
-  , current_volume_{0.3f} 
+Audio::Volume::Volume(ma_sound &sound) : sound_instance_{sound}, current_volume_{0.3f}
 {
   ma_sound_set_volume(&sound_instance_, current_volume_);
 }
