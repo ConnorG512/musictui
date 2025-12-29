@@ -3,7 +3,7 @@
 #include <cassert>
 
 UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy)
-  : window_instance_{createBoxedWindow(x, y)} 
+  : window_instance_{createBoxedWindow(dimensions_xy)} 
 {
   refreshWindow();
 }
@@ -30,7 +30,7 @@ auto UI::Window::createBoxedWindow(const std::optional<std::pair<int, int>> dime
   }
   else 
   {
-    created_window = newwin(getmaxy(created_window), getmaxx(created_window), 0, 0);
+    created_window = newwin(getmaxy(stdscr), getmaxx(stdscr), 0, 0);
     box(created_window, 0, 0);
   }
   assert(created_window != nullptr);
