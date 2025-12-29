@@ -3,16 +3,22 @@
 
 #include <cassert>
 
-auto UI::Text::drawStringToScreen(
-    const UI::Window& window_instance, const char* message, const std::pair<int, int> xy) noexcept -> void
+auto UI::Text::drawStringsToScreen(
+    WINDOW& window_instance, std::span<const char*> messages, 
+    const std::pair<int, int> xy, std::optional<int> color) noexcept -> void
 {
-  assert(message != nullptr);
+  assert(messages.data() != nullptr);
+  
+  if(color.has_value())
+    wattron(&window_instance, color.value());
 
   const auto& [x, y] = xy;
-  mvprintw(y, x, "%s", message);
-}
-
-auto UI::Text::drawColouredString(const UI::Window& window_instance, std::span<const char>(message)) -> void
-{
-  assert(message.data() != nullptr);
+  for(const auto& message : messages)
+  {
+    assert(message != nullptr);
+    mvprintw(y, x, "%s", message);
+  }
+  
+  if(color.has_value())
+    wattroff(&window_instance, color.value());
 }
