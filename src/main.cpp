@@ -51,13 +51,29 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  std::string now_playing_messages {std::format("Now Playing: {}", music_path)};
-  std::array<std::pair<int,int>, 2> positions {{ {1,1} }};
-  std::array<const char*, 1> messages {now_playing_messages.c_str()};
-  UI::Text::drawStringsToScreen(
-      contents_window.ptr(),
-      messages, 
-      std::span<std::pair<int,int>>(positions));
+  constexpr UI::Text::Properties<7> user_controls
+  {
+    .messages = {
+      "Decrease Volume: F1",
+      "Increase Volume: F2",
+      "Pause: F3",
+      "Play: F4",
+      "Seek Backward: F5",
+      "Seek Forward: F6",
+      "Stop: F7"
+    },
+    .xy_positions = {{
+      {1,1},
+      {1,2},
+      {1,3},
+      {1,4},
+      {1,5},
+      {1,6},
+      {1,7}
+    }},
+    .color = std::nullopt,
+  };
+  UI::Text::drawStringsToScreen(contents_window.ptr(), user_controls);
 
   auto character{0};
   while ((character = getch()) != 'q')
