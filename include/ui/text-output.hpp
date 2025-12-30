@@ -29,10 +29,9 @@ namespace UI
       if(text_properties.color.has_value())
         wattron(window_instance, text_properties.color.value());
       
-      const auto& titles = std::views::zip(text_properties.messages, text_properties.xy);
+      const auto& titles = std::views::zip(text_properties.messages, text_properties.xy_positions);
       for(const auto& [string, pos] : titles)
       {
-        assert(string != nullptr);
         const auto& [x_pos, y_pos] = pos;
 
         mvprintw(y_pos, x_pos, "%s", string);
