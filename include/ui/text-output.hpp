@@ -39,7 +39,8 @@ namespace UI
 
       if(text_properties.color.has_value())
         wattroff(window_instance, text_properties.color.value());
-
+      
+      wrefresh(window_instance);
     };
   }
 }
