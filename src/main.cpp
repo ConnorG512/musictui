@@ -3,6 +3,7 @@
 #include "audio/volume.hpp"
 #include "track_instance.hpp"
 #include "ui/window.hpp"
+#include "ui/text-output.hpp"
 
 #include <array>
 #include <cassert>
@@ -13,6 +14,7 @@
 #include <print>
 #include <string>
 #include <sys/mman.h>
+#include <array>
 
 auto main(int argc, const char *argv[]) -> int
 {
@@ -25,6 +27,7 @@ auto main(int argc, const char *argv[]) -> int
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
+  start_color();
 
   const std::string music_path{argv[1]};
 
@@ -40,37 +43,32 @@ auto main(int argc, const char *argv[]) -> int
   keypad(stdscr, TRUE);
   noecho();
   curs_set(0);
-
+  
   refresh();
-  UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 3})};
-
-  playback_window.drawTextToWindow("Now playing:", 1, 1);
-  playback_window.drawTextToWindow(music_path.c_str(), 1, 2);
-  playback_window.drawTextToWindow(std::string{"Volume Down: F1"}.c_str(), 1, 3);
-  playback_window.drawTextToWindow(std::string{"Volume Up: F2"}.c_str(), 1, 4);
-  playback_window.drawTextToWindow(std::string{"Pause: F3"}.c_str(), 1, 5);
-  playback_window.drawTextToWindow(std::string{"Play: F4"}.c_str(), 1, 6);
-  playback_window.drawTextToWindow(std::string{"Seek Backward: F5"}.c_str(), 1, 7);
-  playback_window.drawTextToWindow(std::string{"Seek Forward: F6"}.c_str(), 1, 8);
-  playback_window.drawTextToWindow(std::string{"Stop: F7"}.c_str(), 1, 9);
-
+  UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
   UI::Window contents_window{std::optional<std::pair<int, int>>(
-      {getmaxx(stdscr), getmaxy(stdscr) / 3 * 2}),
-      {0, getmaxy(stdscr) / 3}
+      {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
+      {0, getmaxy(stdscr) / 8}
   };
   
+  std::string now_playing_messages {std::format("Now Playing: {}", music_path)};
+  std::array<std::pair<int,int>, 2> positions {{ {1,1} }};
+  std::array<const char*, 1> messages {now_playing_messages.c_str()};
+  UI::Text::drawStringsToScreen(
+      contents_window.ptr(),
+      messages, 
+      std::span<std::pair<int,int>>(positions));
+
   auto character{0};
   while ((character = getch()) != 'q')
   {
     if (character == KEY_F(1))
     {
-      playback_window.drawTextToWindow(
-          std::format("Volume: {:3.2f}%", (playing_track.track_volume.decreaseVolume()) * 100).c_str(), 1, 10);
+      playing_track.track_volume.decreaseVolume();
     }
     if (character == KEY_F(2))
     {
-      playback_window.drawTextToWindow(
-          std::format("Volume: {:3.2f}%", (playing_track.track_volume.increaseVolume()) * 100).c_str(), 1, 10);
+      playing_track.track_volume.increaseVolume();
     }
     if (character == KEY_F(3))
     {

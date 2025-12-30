@@ -10,9 +10,16 @@ UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy, std::
 
 auto UI::Window::refreshWindow() const noexcept -> void { wrefresh(window_instance_.get()); }
 
-auto UI::Window::drawTextToWindow(const char *message, int x, int y) const noexcept -> void
+auto UI::Window::ptr() const noexcept -> WINDOW* 
 {
-  mvprintw(y, x, "%s", message);
+  assert(window_instance_.get() != nullptr);
+  return window_instance_.get();
+}
+
+auto UI::Window::cptr() const noexcept -> const WINDOW* 
+{
+  assert(window_instance_.get() != nullptr);
+  return window_instance_.get();
 }
 
 auto UI::Window::createBoxedWindow(const std::optional<std::pair<int, int>> dimensions_xy,

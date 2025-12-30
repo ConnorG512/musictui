@@ -14,6 +14,7 @@ set(SOURCE_FILES
   src/audio/volume.cpp
   src/audio/device.cpp
   src/ui/window.cpp
+  src/ui/text-output.cpp
 )
 
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
