@@ -51,8 +51,9 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
+  std::string now_playing_messages {std::format("Now Playing: {}", music_path)};
   std::array<std::pair<int,int>, 2> positions {{ {1,1} }};
-  std::array<const char*, 1> messages {"Now playing: "};
+  std::array<const char*, 1> messages {now_playing_messages.c_str()};
   UI::Text::drawStringsToScreen(
       contents_window.ptr(),
       messages, 
