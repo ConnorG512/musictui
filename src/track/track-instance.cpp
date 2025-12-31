@@ -47,3 +47,9 @@ auto TrackInstance::seekBackward() noexcept -> void
   ma_sound_seek_to_pcm_frame(&current_track_, track_position.getPosition());
   ma_sound_start(&current_track_);
 }
+
+auto TrackInstance::swapTrack() noexcept -> void
+{
+  stopTrack();
+  
+}
