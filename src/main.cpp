@@ -27,22 +27,26 @@ auto main(int argc, const char *argv[]) -> int
   // Enabling all localisation
   setlocale(LC_ALL, "");
   
+  std::vector<std::string> track_list{};
+  track_list.reserve(3);
+
   // Directory
   Directory opened_directory{argv[1]};
   
-  auto song_list {opened_directory.GetDirectoryContents()};
-  if(song_list.empty())
+  auto found_tracks {opened_directory.GetDirectoryContents()};
+  if(found_tracks.empty())
     std::runtime_error("Song list empty!");
-  for(const auto track : song_list)
-    std::println("Found: {}", track);
+
+  for(const auto track : found_tracks)
+  {
+    track_list.emplace_back(std::format("{}/{}", argv[1], track)); 
+  }
 
   // Audio
   Audio::Device device{};
   Audio::Engine audio_engine{};
-  const auto song_path {
-    std::format("{}/{}", argv[1], song_list.at(3))};
 
-  TrackInstance playing_track(song_path.c_str(), audio_engine);
+  TrackInstance playing_track(track_list.at(3).c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
@@ -61,29 +65,7 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  constexpr UI::Text::Properties<7> track_list 
-  {
-    .messages = {
-      "Decrease Volume: F1",
-      "Increase Volume: F2",
-      "Pause: F3",
-      "Play: F4",
-      "Seek Backward: F5",
-      "Seek Forward: F6",
-      "Stop: F7",
-    },
-    .xy_positions = {{
-      {1,10},
-      {1,11},
-      {1,12},
-      {1,13},
-      {1,14},
-      {1,15},
-      {1,16}
-    }},
-    .color = std::nullopt,
-  };
-  UI::Text::drawStringsToScreen(contents_window.ptr(), track_list);
+  //UI::Text::drawStringsToScreen(contents_window.ptr(), song_list);
 
   auto character{0};
   while ((character = getch()) != 'q')
