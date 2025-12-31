@@ -65,8 +65,8 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  //UI::Text::drawStringsToScreen(contents_window.ptr(), song_list);
-
+  UI::Text::drawVerticalStringList(contents_window.ptr(), track_list, {1,10});
+  
   auto character{0};
   while ((character = getch()) != 'q')
   {

@@ -22,24 +22,19 @@ namespace UI
       std::optional<int> color {std::nullopt};
     };
 
-    auto drawStringsToScreen(
-        WINDOW* window_instance, std::span<const std::string> text_properties) noexcept -> void
+    auto drawVerticalStringList(
+        WINDOW* window_instance, std::span<const std::string> string_list, std::pair<int,int> xy) noexcept -> void
     {
-//      if(text_properties.color.has_value())
-//        wattron(window_instance, text_properties.color.value());
-//
-//      const auto& titles = std::views::zip(text_properties, text_properties.xy_positions);
-//      for(const auto& [string, pos] : titles)
-//      {
-//        const auto& [x_pos, y_pos] = pos;
-//
-//        mvprintw(y_pos, x_pos, "%s", string);
-//      }
-//
-//      if(text_properties.color.has_value())
-//        wattroff(window_instance, text_properties.color.value());
-//      
-//      wrefresh(window_instance);
+      const auto& [x_pos, y_pos] = xy;
+      auto vertical_pos {y_pos};
+
+      for(const auto& string : string_list)
+      {
+        mvprintw(vertical_pos, x_pos, "%s", string.c_str());
+        vertical_pos += 1;
+      }
+
+      wrefresh(window_instance);
     };
   }
 }
