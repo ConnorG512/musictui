@@ -16,6 +16,7 @@ private:
   ma_sound current_track_{};
 
   auto createTrack(const char *track_path, Audio::Engine &engine) const -> ma_sound;
+  int current_track {};
 
 public:
   Audio::Volume track_volume{current_track_};
