@@ -16,15 +16,13 @@
 #include <sys/mman.h>
 #include <array>
 #include <print>
+#include <stdexcept>
 
 auto main(int argc, const char *argv[]) -> int
 {
   // Get Music File
   if (argc != 2)
-  {
-    std::println("Invalid path to file!");
-    return -1;
-  }
+    std::runtime_error("Invalid path to file!")
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
