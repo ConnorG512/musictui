@@ -29,7 +29,7 @@ auto main(int argc, const char *argv[]) -> int
   
   // Directory
   const std::string music_path{argv[1]};
-  Directory opened_directory{argv[1]};
+  Directory opened_directory{music_path.c_str()};
   
   // Audio
   Audio::Device device{};
