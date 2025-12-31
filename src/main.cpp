@@ -11,10 +11,10 @@
 #include <format>
 #include <locale.h>
 #include <ncurses.h>
-#include <print>
 #include <string>
 #include <sys/mman.h>
 #include <array>
+#include <print>
 
 auto main(int argc, const char *argv[]) -> int
 {
@@ -60,16 +60,16 @@ auto main(int argc, const char *argv[]) -> int
       "Play: F4",
       "Seek Backward: F5",
       "Seek Forward: F6",
-      "Stop: F7"
+      "Stop: F7",
     },
     .xy_positions = {{
-      {1,1},
-      {1,2},
-      {1,3},
-      {1,4},
-      {1,5},
-      {1,6},
-      {1,7}
+      {1,10},
+      {1,11},
+      {1,12},
+      {1,13},
+      {1,14},
+      {1,15},
+      {1,16}
     }},
     .color = std::nullopt,
   };
