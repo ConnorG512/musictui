@@ -98,6 +98,14 @@ auto main(int argc, const char *argv[]) -> int
     {
       playing_track.stopTrack();
     }
+    if (character == 'k')
+    {
+      playing_track.stopTrack();
+    }
+    if (character == 'j')
+    {
+      playing_track.stopTrack();
+    }
     refresh();
   }
 
