@@ -6,8 +6,6 @@
 auto Directory::OpenDirectory(const char* music_directory) const 
   -> std::unique_ptr<DIR, decltype(&closedir)>
 {
-  assert(music_directory_ != nullptr);
-  
   DIR *found_directory {opendir(music_directory)};
   if (found_directory == nullptr)
     throw std::runtime_error("Failed to open directory!");
