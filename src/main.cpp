@@ -28,27 +28,31 @@ auto main(int argc, const char *argv[]) -> int
   setlocale(LC_ALL, "");
   
   // Directory
-  const std::string music_path{argv[1]};
-  Directory opened_directory{music_path.c_str()};
+  Directory opened_directory{argv[1]};
   
+  auto song_list {opened_directory.GetDirectoryContents()};
+  if(song_list.empty())
+    std::runtime_error("Song list empty!");
+  for(const auto track : song_list)
+    std::println("Found: {}", track);
+
   // Audio
   Audio::Device device{};
   Audio::Engine audio_engine{};
-  const auto song_path {std::format("{}{}", music_path, opened_directory.GetDirectoryContents().data()->d_name)};
+  const auto song_path {
+    std::format("{}/{}", argv[1], song_list.at(3))};
 
   TrackInstance playing_track(song_path.c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
   
-
-  return 0;
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
   noecho();
   curs_set(0);
-  start_color();
+  //start_color();
   
   refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
@@ -57,7 +61,7 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  constexpr UI::Text::Properties<7> user_controls
+  constexpr UI::Text::Properties<7> track_list 
   {
     .messages = {
       "Decrease Volume: F1",
@@ -79,7 +83,7 @@ auto main(int argc, const char *argv[]) -> int
     }},
     .color = std::nullopt,
   };
-  UI::Text::drawStringsToScreen(contents_window.ptr(), user_controls);
+  UI::Text::drawStringsToScreen(contents_window.ptr(), track_list);
 
   auto character{0};
   while ((character = getch()) != 'q')

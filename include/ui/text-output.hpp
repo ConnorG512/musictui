@@ -44,4 +44,27 @@ namespace UI
       wrefresh(window_instance);
     };
   }
+
+  constexpr Text::Properties<7> user_controls 
+  {
+    .messages = {
+      "Decrease Volume: F1",
+      "Increase Volume: F2",
+      "Pause: F3",
+      "Play: F4",
+      "Seek Backward: F5",
+      "Seek Forward: F6",
+      "Stop: F7",
+    },
+    .xy_positions = {{
+      {1,10},
+      {1,11},
+      {1,12},
+      {1,13},
+      {1,14},
+      {1,15},
+      {1,16}
+    }},
+    .color = std::nullopt,
+  };
 }
