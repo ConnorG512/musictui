@@ -34,11 +34,15 @@ auto main(int argc, const char *argv[]) -> int
   // Audio
   Audio::Device device{};
   Audio::Engine audio_engine{};
-  TrackInstance playing_track(music_path.c_str(), audio_engine);
+  const auto song_path {std::format("{}{}", music_path, opened_directory.GetDirectoryContents().data()->d_name)};
+
+  TrackInstance playing_track(song_path.c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
+  
 
+  return 0;
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
