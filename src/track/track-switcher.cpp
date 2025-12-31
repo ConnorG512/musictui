@@ -1,5 +1,9 @@
 #include "track/track-switcher.hpp"
 
+Track::Switcher::Switcher(int total_tracks, int current_track)
+  : total_tracks_{total_tracks}
+  , current_track_index_{current_track} {}
+
 auto Track::Switcher::decreaseIndex() -> int 
 {
   current_track_index_ += 1;
