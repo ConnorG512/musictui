@@ -4,6 +4,7 @@
 #include "audio/volume.hpp"
 #include "playback-position.hpp"
 #include "track/track-switcher.hpp"
+#include "track/track-data.hpp"
 
 #include <miniaudio/miniaudio.h>
 
@@ -12,12 +13,9 @@ class TrackInstance
 public:
   TrackInstance(
       const char *track_path, Audio::Engine &engine, int total_tracks, int current_track);
-  ~TrackInstance();
 
 private:
-  ma_sound current_track_{};
-
-  auto createTrack(const char *track_path, Audio::Engine &engine) const -> ma_sound;
+  Track::Data data_instance_;
   int current_track {};
 
 public:
