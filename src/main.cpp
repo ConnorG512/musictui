@@ -22,13 +22,16 @@ auto main(int argc, const char *argv[]) -> int
 {
   // Get Music File
   if (argc != 2)
-    std::runtime_error("Invalid path to file!")
+    std::runtime_error("Invalid path to file!");
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
-
+  
+  // Directory
   const std::string music_path{argv[1]};
-
+  Directory opened_directory{argv[1]};
+  
+  // Audio
   Audio::Device device{};
   Audio::Engine audio_engine{};
   TrackInstance playing_track(music_path.c_str(), audio_engine);
