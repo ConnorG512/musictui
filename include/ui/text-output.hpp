@@ -15,32 +15,25 @@ namespace UI
   
   namespace Text
   {
-    template <std::size_t num_strings>
     struct Properties 
     {
-      std::array<const char*, num_strings> messages {};
-      std::array<std::pair<int, int>, num_strings> xy_positions {};
+      std::span<std::string> strings{};
+      std::span<std::pair<int, int>> xy_positions {};
       std::optional<int> color {std::nullopt};
     };
 
-    template <std::size_t num_strings>
-    auto drawStringsToScreen(
-        WINDOW* window_instance, const Properties<num_strings>& text_properties) noexcept -> void
+    auto drawVerticalStringList(
+        WINDOW* window_instance, std::span<const std::string> string_list, std::pair<int,int> xy) noexcept -> void
     {
-      if(text_properties.color.has_value())
-        wattron(window_instance, text_properties.color.value());
+      const auto& [x_pos, y_pos] = xy;
+      auto vertical_pos {y_pos};
 
-      const auto& titles = std::views::zip(text_properties.messages, text_properties.xy_positions);
-      for(const auto& [string, pos] : titles)
+      for(const auto& string : string_list)
       {
-        const auto& [x_pos, y_pos] = pos;
-
-        mvprintw(y_pos, x_pos, "%s", string);
+        mvprintw(vertical_pos, x_pos, "%s", string.c_str());
+        vertical_pos += 1;
       }
 
-      if(text_properties.color.has_value())
-        wattroff(window_instance, text_properties.color.value());
-      
       wrefresh(window_instance);
     };
   }

@@ -4,6 +4,7 @@
 #include "track_instance.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
+#include "read-directory.hpp"
 
 #include <array>
 #include <cassert>
@@ -15,34 +16,47 @@
 #include <sys/mman.h>
 #include <array>
 #include <print>
+#include <stdexcept>
 
 auto main(int argc, const char *argv[]) -> int
 {
   // Get Music File
   if (argc != 2)
-  {
-    std::println("Invalid path to file!");
-    return -1;
-  }
+    std::runtime_error("Invalid path to file!");
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
-  start_color();
+  
+  std::vector<std::string> track_list{};
+  track_list.reserve(3);
 
-  const std::string music_path{argv[1]};
+  // Directory
+  Directory opened_directory{argv[1]};
+  
+  auto found_tracks {opened_directory.GetDirectoryContents()};
+  if(found_tracks.empty())
+    std::runtime_error("Song list empty!");
 
+  for(const auto track : found_tracks)
+  {
+    track_list.emplace_back(std::format("{}/{}", argv[1], track)); 
+  }
+
+  // Audio
   Audio::Device device{};
   Audio::Engine audio_engine{};
-  TrackInstance playing_track(music_path.c_str(), audio_engine);
+
+  TrackInstance playing_track(track_list.at(3).c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
-
+  
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
   noecho();
   curs_set(0);
+  //start_color();
   
   refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
@@ -51,30 +65,8 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  constexpr UI::Text::Properties<7> user_controls
-  {
-    .messages = {
-      "Decrease Volume: F1",
-      "Increase Volume: F2",
-      "Pause: F3",
-      "Play: F4",
-      "Seek Backward: F5",
-      "Seek Forward: F6",
-      "Stop: F7",
-    },
-    .xy_positions = {{
-      {1,10},
-      {1,11},
-      {1,12},
-      {1,13},
-      {1,14},
-      {1,15},
-      {1,16}
-    }},
-    .color = std::nullopt,
-  };
-  UI::Text::drawStringsToScreen(contents_window.ptr(), user_controls);
-
+  UI::Text::drawVerticalStringList(contents_window.ptr(), track_list, {1,10});
+  
   auto character{0};
   while ((character = getch()) != 'q')
   {
