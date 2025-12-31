@@ -46,7 +46,7 @@ auto main(int argc, const char *argv[]) -> int
   Audio::Device device{};
   Audio::Engine audio_engine{};
 
-  TrackInstance playing_track(track_list.at(3).c_str(), audio_engine);
+  TrackInstance playing_track(track_list.at(2).c_str(), audio_engine);
 
   // Play sound
   ma_sound_start(&playing_track.ref());
