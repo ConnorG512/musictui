@@ -3,13 +3,15 @@
 #include "audio/engine.hpp"
 #include "audio/volume.hpp"
 #include "playback-position.hpp"
+#include "track/track-switcher.hpp"
 
 #include <miniaudio/miniaudio.h>
 
 class TrackInstance
 {
 public:
-  TrackInstance(const char *track_path, Audio::Engine &engine);
+  TrackInstance(
+      const char *track_path, Audio::Engine &engine, int total_tracks, int current_track);
   ~TrackInstance();
 
 private:
@@ -21,6 +23,7 @@ private:
 public:
   Audio::Volume track_volume{current_track_};
   PlaybackPosition track_position;
+  Track::Switcher Switcher{0,0};
 
   auto ref() noexcept -> ma_sound &;
   auto playTrack() noexcept -> void;

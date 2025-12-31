@@ -2,8 +2,9 @@
 
 #include <cassert>
 
-TrackInstance::TrackInstance(const char *track_path, Audio::Engine &engine)
+TrackInstance::TrackInstance(const char *track_path, Audio::Engine &engine, int total_tracks, int current_track)
     : current_track_{createTrack(track_path, engine)}, track_volume{current_track_}, track_position(current_track_)
+    , Switcher{total_tracks, current_track}
 {
 }
 
