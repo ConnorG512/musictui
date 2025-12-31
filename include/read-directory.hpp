@@ -9,9 +9,6 @@
 class Directory
 {
   private:
-    explicit Directory(const char* music_directory)
-      : music_directory_{OpenDirectory(music_directory)} {}
-
     auto OpenDirectory(const char* music_directory) const 
       -> std::unique_ptr<DIR, decltype(&closedir)>;
 
@@ -19,6 +16,8 @@ class Directory
       opendir(std::format("{}{}", std::getenv("HOME"), "/music").c_str()), &closedir}; 
   
   public:
+    explicit Directory(const char* music_directory)
+      : music_directory_{OpenDirectory(music_directory)} {}
     
    auto GetDirectoryContents() -> std::span<dirent>;
 };
