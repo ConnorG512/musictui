@@ -15,3 +15,10 @@ auto Directory::OpenDirectory(const char* music_directory) const
   return std::unique_ptr<DIR, decltype(&closedir)>{found_directory, &closedir};
 }
 
+auto Directory::GetDirectoryContents() -> std::span<dirent>
+{
+  return {
+    readdir(music_directory_.get()),
+    1
+  };
+}

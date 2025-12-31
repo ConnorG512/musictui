@@ -4,6 +4,7 @@
 #include <memory>
 #include <sys/types.h>
 #include <dirent.h>
+#include <span>
 
 class Directory
 {
@@ -18,5 +19,6 @@ class Directory
       opendir(std::format("{}{}", std::getenv("HOME"), "/music").c_str()), &closedir}; 
   
   public:
-
+    
+   auto GetDirectoryContents() -> std::span<dirent>;
 };
