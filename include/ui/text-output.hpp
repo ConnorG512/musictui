@@ -7,6 +7,7 @@
 #include <optional>
 #include <cstddef>
 #include <ranges>
+#include <print>
 
 namespace UI 
 {
@@ -28,7 +29,7 @@ namespace UI
     {
       if(text_properties.color.has_value())
         wattron(window_instance, text_properties.color.value());
-      
+
       const auto& titles = std::views::zip(text_properties.messages, text_properties.xy_positions);
       for(const auto& [string, pos] : titles)
       {
