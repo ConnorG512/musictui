@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCE_FILES
   src/main.cpp
-  src/track-instance.cpp
+  src/track/track-instance.cpp
   src/playback-position.cpp
   src/audio/engine.cpp
   src/audio/volume.cpp

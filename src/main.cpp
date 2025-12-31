@@ -1,7 +1,7 @@
 #include "audio/device.hpp"
 #include "audio/engine.hpp"
 #include "audio/volume.hpp"
-#include "track_instance.hpp"
+#include "track/track_instance.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
 #include "read-directory.hpp"

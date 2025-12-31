@@ -1,5 +1,5 @@
 #include "playback-position.hpp"
-#include "track_instance.hpp"
+#include "track/track_instance.hpp"
 
 PlaybackPosition::PlaybackPosition(ma_sound &track) : current_track_instance_{track} {}
 
