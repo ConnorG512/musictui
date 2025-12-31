@@ -39,7 +39,7 @@ auto main(int argc, const char *argv[]) -> int
 
   for(const auto track : found_tracks)
   {
-    track_list.emplace_back(std::format("{}/{}", argv[1], track)); 
+    track_list.emplace_back(std::format("{}{}", argv[1], track)); 
   }
 
   // Audio
