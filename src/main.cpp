@@ -46,9 +46,8 @@ auto main(int argc, const char *argv[]) -> int
   Audio::Device device{};
   Audio::Engine audio_engine{};
   
-  int current_track{2};
   TrackInstance playing_track(
-      track_list.at(current_track).c_str(), audio_engine, current_track, track_list.size());
+      track_list.at(2).c_str(), audio_engine, 2, track_list.size());
 
   // Play sound
   ma_sound_start(&playing_track.ref());
@@ -102,12 +101,15 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == 'k')
     {
-      current_track += 1;
+      playing_track.Switcher.increaseIndex();
       playing_track.stopTrack();
+      playing_track.playTrack();
     }
     if (character == 'j')
     {
+      playing_track.Switcher.decreaseIndex();
       playing_track.stopTrack();
+      playing_track.playTrack();
     }
     refresh();
   }
