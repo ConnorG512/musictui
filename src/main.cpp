@@ -4,6 +4,7 @@
 #include "track_instance.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
+#include "read-directory.hpp"
 
 #include <array>
 #include <cassert>
@@ -27,7 +28,6 @@ auto main(int argc, const char *argv[]) -> int
 
   // Enabling all localisation
   setlocale(LC_ALL, "");
-  start_color();
 
   const std::string music_path{argv[1]};
 
@@ -43,6 +43,7 @@ auto main(int argc, const char *argv[]) -> int
   keypad(stdscr, TRUE);
   noecho();
   curs_set(0);
+  start_color();
   
   refresh();
   UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
