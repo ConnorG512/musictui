@@ -1,4 +1,5 @@
 #include "audio/engine.hpp"
+#include "audio/playing-sound.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
 #include "read-directory.hpp"
