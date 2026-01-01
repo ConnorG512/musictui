@@ -1,5 +1,7 @@
 #include "audio/engine.hpp"
 #include "audio/playing-sound.hpp"
+#include "audio/volume.hpp"
+#include "audio/playback.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
 #include "read-directory.hpp"
@@ -42,7 +44,9 @@ auto main(int argc, const char *argv[]) -> int
 
   // Audio
   Audio::Engine audio_engine{};
-  Audio::PlayingSound{audio_engine.ref(), track_list.at(2).c_str()};
+  Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(2).c_str()};
+  Audio::setVolume(current_track.ref(), 0.3);
+
   
   // Main Loop:
   initscr();
@@ -65,9 +69,11 @@ auto main(int argc, const char *argv[]) -> int
   {
     if (character == KEY_F(1))
     {
+      Audio::Playback::startPlayback(current_track.ref());
     }
     if (character == KEY_F(2))
     {
+      Audio::Playback::stopPlayback(current_track.ref());
     }
     if (character == KEY_F(3))
     {
