@@ -38,3 +38,13 @@ auto Audio::PlayingSound::resetSound(const char* file_path)
   clearSound();
   sound_instance_ = CreateSound(engine_, file_path);
 }
+
+auto Audio::PlayingSound::ref() noexcept -> ma_sound&
+{
+  return sound_instance_;
+}
+
+auto Audio::PlayingSound::cref() const noexcept -> const ma_sound&
+{
+  return sound_instance_;
+}
