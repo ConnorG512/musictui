@@ -12,6 +12,7 @@ set(SOURCE_FILES
   src/audio/playing-sound.cpp
   src/audio/volume.cpp
   src/audio/playback.cpp
+  src/audio/track-properties.cpp
   src/ui/window.cpp
   src/read-directory.cpp
 )
