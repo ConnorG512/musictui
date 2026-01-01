@@ -11,6 +11,7 @@ set(SOURCE_FILES
   src/audio/engine.cpp
   src/audio/playing-sound.cpp
   src/audio/volume.cpp
+  src/audio/playback.cpp
   src/ui/window.cpp
   src/read-directory.cpp
 )
