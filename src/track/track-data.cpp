@@ -25,6 +25,14 @@ auto Track::Data::CreateData(const char* file_path, Audio::Engine &engine) -> ma
   return track;
 }
 
+auto Track::Data::resetData(const char* file_path, Audio::Engine &engine) -> void
+{
+  assert(file_path != nullptr);
+  
+  destroyData();
+  CreateData(file_path, engine);
+}
+
 auto Track::Data::destroyData() -> void 
 {
   ma_sound_uninit(&data_instance_);

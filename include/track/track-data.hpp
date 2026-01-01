@@ -20,5 +20,6 @@ namespace Track
 
       auto CreateData(const char* file_path, Audio::Engine &engine) -> ma_sound;
       auto destroyData() -> void;
+      auto resetData(const char* file_path, Audio::Engine &engine) -> void;
   };
 }
