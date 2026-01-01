@@ -16,7 +16,8 @@ public:
   Engine(Engine &&other) noexcept = default;
   Engine &operator=(Engine &&other) noexcept = default;
 
-  auto ptr() noexcept -> ma_engine *;
+  auto ref() noexcept -> ma_engine&;
+  auto cref() const noexcept -> const ma_engine&;
 
 private:
   ma_engine engine_{};
