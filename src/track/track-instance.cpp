@@ -35,3 +35,14 @@ auto TrackInstance::seekBackward() noexcept -> void
   ma_sound_seek_to_pcm_frame(&data_instance_.ref(), track_position.getPosition());
   ma_sound_start(&data_instance_.ref());
 }
+
+auto TrackInstance::moveTrackForward() noexcept -> void
+{
+  stopTrack();
+  data_instance_.resetData(file_path, engine)
+}
+
+auto TrackInstance::moveTrackBackward() noexcept -> void
+{
+
+}

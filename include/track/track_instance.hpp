@@ -28,4 +28,6 @@ public:
   auto stopTrack() noexcept -> void;
   auto seekForward() noexcept -> void;
   auto seekBackward() noexcept -> void;
+  auto moveTrackForward() noexcept -> void;
+  auto moveTrackBackward() noexcept -> void;
 };
