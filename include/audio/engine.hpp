@@ -11,10 +11,10 @@ public:
   Engine();
   ~Engine();
 
-  Engine(const Engine &other) = default;
-  Engine &operator=(const Engine &other) = default;
-  Engine(Engine &&other) noexcept = default;
-  Engine &operator=(Engine &&other) noexcept = default;
+  Engine(const Engine &other) = delete;
+  Engine &operator=(const Engine &other) = delete;
+  Engine(Engine &&other) noexcept = delete;
+  Engine &operator=(Engine &&other) noexcept = delete;
 
   auto ref() noexcept -> ma_engine&;
   auto cref() const noexcept -> const ma_engine&;
