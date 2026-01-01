@@ -15,6 +15,9 @@ namespace Track
       Data(const char* file_path, Audio::Engine &engine);
       ~Data();
       
+      auto ref() noexcept -> ma_sound&;
+      auto cref() const noexcept -> const ma_sound&;
+
       auto CreateData(const char* file_path, Audio::Engine &engine) -> ma_sound;
       auto destroyData() -> void;
   };

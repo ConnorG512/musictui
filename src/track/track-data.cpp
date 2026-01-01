@@ -29,3 +29,13 @@ auto Track::Data::destroyData() -> void
 {
   ma_sound_uninit(&data_instance_);
 }
+
+auto Track::Data::ref() noexcept -> ma_sound&
+{
+  return data_instance_;
+}
+
+auto Track::Data::cref() const noexcept -> const ma_sound& 
+{
+  return data_instance_;
+}
