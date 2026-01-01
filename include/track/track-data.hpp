@@ -12,14 +12,14 @@ namespace Track
       ma_sound data_instance_ {};
 
     public:
-      Data(const char* file_path, Audio::Engine &engine);
+      Data(const char* file_path, ma_engine &engine);
       ~Data();
       
       auto ref() noexcept -> ma_sound&;
       auto cref() const noexcept -> const ma_sound&;
 
-      auto CreateData(const char* file_path, Audio::Engine &engine) -> ma_sound;
+      auto CreateData(const char* file_path, ma_engine &engine) -> ma_sound;
       auto destroyData() -> void;
-      auto resetData(const char* file_path, Audio::Engine &engine) -> void;
+      auto resetData(const char* file_path, ma_engine &engine) -> void;
   };
 }

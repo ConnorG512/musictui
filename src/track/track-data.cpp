@@ -2,8 +2,9 @@
 #include "audio/engine.hpp"
 
 #include <cassert>
+#include <stdexcept>
 
-Track::Data::Data(const char* file_path, Audio::Engine &engine)
+Track::Data::Data(const char* file_path, ma_engine& engine)
   : data_instance_{CreateData(file_path, engine)} {}
 
 Track::Data::~Data()
@@ -11,13 +12,13 @@ Track::Data::~Data()
   destroyData();
 }
 
-auto Track::Data::CreateData(const char* file_path, Audio::Engine &engine) -> ma_sound 
+auto Track::Data::CreateData(const char* file_path, ma_engine &engine) -> ma_sound 
 {
   assert(file_path != nullptr);
 
   ma_sound track{};
 
-  const auto result{ma_sound_init_from_file(engine.ptr(), file_path, 0, nullptr, nullptr, &track)};
+  const auto result{ma_sound_init_from_file(&engine, file_path, 0, nullptr, nullptr, &track)};
 
   if (result != MA_SUCCESS)
     throw std::runtime_error("Failed to create sound!");
@@ -25,7 +26,7 @@ auto Track::Data::CreateData(const char* file_path, Audio::Engine &engine) -> ma
   return track;
 }
 
-auto Track::Data::resetData(const char* file_path, Audio::Engine &engine) -> void
+auto Track::Data::resetData(const char* file_path, ma_engine &engine) -> void
 {
   assert(file_path != nullptr);
   
