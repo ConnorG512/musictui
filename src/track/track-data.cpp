@@ -30,7 +30,7 @@ auto Track::Data::resetData(const char* file_path, Audio::Engine &engine) -> voi
   assert(file_path != nullptr);
   
   destroyData();
-  CreateData(file_path, engine);
+  data_instance_ = CreateData(file_path, engine);
 }
 
 auto Track::Data::destroyData() -> void 
