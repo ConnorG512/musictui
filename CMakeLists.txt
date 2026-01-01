@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCE_FILES
   src/main.cpp
   src/audio/engine.cpp
+  src/audio/playing-sound.cpp
   src/ui/window.cpp
   src/read-directory.cpp
 )
