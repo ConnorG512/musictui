@@ -12,9 +12,6 @@ set(SOURCE_FILES
   src/track/track-switcher.cpp
   src/track/track-data.cpp
   src/playback-position.cpp
-  src/audio/engine.cpp
-  src/audio/volume.cpp
-  src/audio/device.cpp
   src/ui/window.cpp
   src/read-directory.cpp
 )
