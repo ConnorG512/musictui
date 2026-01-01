@@ -1,6 +1,6 @@
 #include "audio/volume.hpp"
 
-[[maybe_unused]] auto Audio::setVolume(ma_sound& sound, float volume) -> float
+auto Audio::setVolume(ma_sound& sound, float volume) -> void
 {
   if (volume > 1.0)
     ma_sound_set_volume(&sound, 1.0);
@@ -8,4 +8,5 @@
     ma_sound_set_volume(&sound, 0.0);
   else 
     ma_sound_set_volume(&sound, volume);
+
 }

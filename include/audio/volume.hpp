@@ -4,5 +4,5 @@
 
 namespace Audio 
 {
-  [[maybe_unused]] auto setVolume(ma_sound& sound, float volume = 0.3) -> float;
+  auto setVolume(ma_sound& sound, float volume = 0.3) -> void;
 }
