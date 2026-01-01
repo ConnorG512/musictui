@@ -42,6 +42,7 @@ auto main(int argc, const char *argv[]) -> int
 
   // Audio
   Audio::Engine audio_engine{};
+  Audio::PlayingSound{audio_engine.ref(), track_list.at(2).c_str()};
   
   // Main Loop:
   initscr();
