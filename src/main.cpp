@@ -1,7 +1,4 @@
-#include "audio/device.hpp"
 #include "audio/engine.hpp"
-#include "audio/volume.hpp"
-#include "track/track_instance.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
 #include "read-directory.hpp"
@@ -43,14 +40,7 @@ auto main(int argc, const char *argv[]) -> int
   }
 
   // Audio
-  Audio::Device device{};
   Audio::Engine audio_engine{};
-  
-  TrackInstance playing_track(
-      track_list.at(2).c_str(), audio_engine, 2, track_list.size());
-
-  // Play sound
-  ma_sound_start(&playing_track.ref());
   
   // Main Loop:
   initscr();
@@ -73,43 +63,30 @@ auto main(int argc, const char *argv[]) -> int
   {
     if (character == KEY_F(1))
     {
-      playing_track.track_volume.decreaseVolume();
     }
     if (character == KEY_F(2))
     {
-      playing_track.track_volume.increaseVolume();
     }
     if (character == KEY_F(3))
     {
-      playing_track.pauseTrack();
     }
     if (character == KEY_F(4))
     {
-      playing_track.playTrack();
     }
     if (character == KEY_F(5))
     {
-      playing_track.seekBackward();
     }
     if (character == KEY_F(6))
     {
-      playing_track.seekForward();
     }
     if (character == KEY_F(7))
     {
-      playing_track.stopTrack();
     }
     if (character == 'k')
     {
-      playing_track.Switcher.increaseIndex();
-      playing_track.stopTrack();
-      playing_track.playTrack();
     }
     if (character == 'j')
     {
-      playing_track.Switcher.decreaseIndex();
-      playing_track.stopTrack();
-      playing_track.playTrack();
     }
     refresh();
   }

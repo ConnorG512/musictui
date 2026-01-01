@@ -9,10 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCE_FILES
   src/main.cpp
   src/audio/engine.cpp
-  src/track/track-instance.cpp
-  src/track/track-switcher.cpp
-  src/track/track-data.cpp
-  src/playback-position.cpp
   src/ui/window.cpp
   src/read-directory.cpp
 )
