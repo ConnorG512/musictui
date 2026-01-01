@@ -10,19 +10,18 @@
 
 class TrackInstance
 {
-public:
-  TrackInstance(
-      const char *track_path, Audio::Engine &engine, int total_tracks, int current_track);
-
 private:
   Track::Data data_instance_;
   int current_track {};
 
 public:
-  Audio::Volume track_volume{current_track_};
+  Audio::Volume track_volume;
   PlaybackPosition track_position;
   Track::Switcher Switcher{0,0};
 
+  TrackInstance(
+      const char *track_path, Audio::Engine &engine, int total_tracks, int current_track);
+  
   auto ref() noexcept -> ma_sound &;
   auto playTrack() noexcept -> void;
   auto pauseTrack() noexcept -> void;
