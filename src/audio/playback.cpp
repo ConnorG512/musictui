@@ -21,11 +21,20 @@ auto Audio::Playback::stopPlayback(ma_sound& sound) -> void
 
 auto Audio::Playback::seekForward(ma_sound& sound, ma_uint32 sample_rate) noexcept -> void
 {
+  const auto frames_to_skip {sample_rate * 5};
+
   ma_uint64 track_cursor{};
   ma_sound_get_cursor_in_pcm_frames(&sound, &track_cursor);
+
+  ma_sound_seek_to_pcm_frame(&sound, track_cursor += frames_to_skip);
 }
 
 auto Audio::Playback::seekBackward(ma_sound& sound, ma_uint32 sample_rate) noexcept -> void 
 {
+  const auto frames_to_skip {sample_rate * 5};
 
+  ma_uint64 track_cursor{};
+  ma_sound_get_cursor_in_pcm_frames(&sound, &track_cursor);
+
+  ma_sound_seek_to_pcm_frame(&sound, track_cursor -= frames_to_skip);
 }

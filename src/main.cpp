@@ -57,8 +57,10 @@ auto main(int argc, const char *argv[]) -> int
   //start_color();
   
   refresh();
-  UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
-  UI::Window contents_window{std::optional<std::pair<int, int>>(
+  UI::Window playback_window{
+    std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
+  UI::Window contents_window{
+    std::optional<std::pair<int, int>>(
       {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
       {0, getmaxy(stdscr) / 8}
   };
@@ -86,9 +88,13 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == KEY_F(5))
     {
+      Audio::Playback::seekBackward(
+          current_track.ref(), current_track_properties.sample_rate);
     }
     if (character == KEY_F(6))
     {
+      Audio::Playback::seekForward(
+          current_track.ref(), current_track_properties.sample_rate);
     }
     if (character == KEY_F(7))
     {
