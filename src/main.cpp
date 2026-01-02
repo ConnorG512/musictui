@@ -45,7 +45,9 @@ auto main(int argc, const char *argv[]) -> int
 
   // Audio
   Audio::Engine audio_engine{};
-  Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(2).c_str()};
+
+  int current_track_index {2};
+  Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(current_track_index).c_str()};
   Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
   Audio::Properties current_track_properties{current_track.ref()};
 
@@ -101,9 +103,19 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == 'k')
     {
+      current_track_index += 1;
+      if(current_track_index > track_list.size() - 1)
+        current_track_index -= 1;
+      current_track.resetSound(track_list.at(current_track_index).c_str());
+      std::println("Current track: {}", track_list.at(current_track_index));
     }
     if (character == 'j')
     {
+      current_track_index -= 1;
+      if(current_track_index < 2)
+        current_track_index += 1;
+      current_track.resetSound(track_list.at(current_track_index).c_str());
+      std::println("Current track: {}", track_list.at(current_track_index));
     }
     refresh();
   }
