@@ -3,6 +3,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <ranges>
+#include <cstring>
 
 auto Directory::OpenDirectory(const char* music_directory_path) const 
   -> std::unique_ptr<DIR, decltype(&closedir)>
@@ -19,8 +20,11 @@ auto Directory::GetDirectoryContents() -> std::vector<std::string>
   std::vector<std::string> file_names{};
   file_names.reserve(5);
   
-  // first two entries (0 & 1) are . and ..
-  while (struct dirent *result = readdir(music_directory_.get())) {
+  while (struct dirent *result = readdir(music_directory_.get())) 
+  {
+    // first two entries (0 & 1) are . and ..
+    if(result->d_type != DT_REG)
+      continue;
     file_names.emplace_back(result->d_name);
   }
 
