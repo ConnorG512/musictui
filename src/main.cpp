@@ -48,9 +48,7 @@ auto main(int argc, const char *argv[]) -> int
   Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(2).c_str()};
   Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
   Audio::Properties current_track_properties{current_track.ref()};
-  
-  float current_volume{0.3};
-  
+
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
