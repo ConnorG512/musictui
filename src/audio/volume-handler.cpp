@@ -1,6 +1,12 @@
 #include "audio/volume-handler.hpp"
 
-auto Audio::VolumeHandler::increaseVolume(Direction direction, float change_amount) noexcept -> float
+Audio::VolumeHandler::VolumeHandler(ma_sound& sound_instance, float volume)
+  : sound_instance_{sound_instance}, current_volume_{volume} 
+{
+  ma_sound_set_volume(&sound_instance_, current_volume_);
+}
+
+auto Audio::VolumeHandler::increaseVolume(float change_amount) noexcept -> float
 {
   current_volume_ += change_amount; 
   if(current_volume_ > 1.0f)
@@ -10,7 +16,7 @@ auto Audio::VolumeHandler::increaseVolume(Direction direction, float change_amou
   return current_volume_;
 }
 
-auto Audio::VolumeHandler::decreaseVolume(Direction direction, float change_amount) noexcept -> float
+auto Audio::VolumeHandler::decreaseVolume(float change_amount) noexcept -> float
 {
   current_volume_ -= change_amount; 
   if(current_volume_ < 0.0f)

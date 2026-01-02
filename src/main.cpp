@@ -1,6 +1,6 @@
 #include "audio/engine.hpp"
 #include "audio/playing-sound.hpp"
-#include "audio/volume.hpp"
+#include "audio/volume-handler.hpp"
 #include "audio/playback.hpp"
 #include "audio/track-properties.hpp"
 #include "ui/window.hpp"
@@ -46,10 +46,10 @@ auto main(int argc, const char *argv[]) -> int
   // Audio
   Audio::Engine audio_engine{};
   Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(2).c_str()};
+  Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
   Audio::Properties current_track_properties{current_track.ref()};
   
   float current_volume{0.3};
-  Audio::setVolume(current_track.ref(), current_volume);
   
   // Main Loop:
   initscr();
@@ -80,11 +80,11 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == KEY_F(3))
     {
-      Audio::setVolume(current_track.ref(), current_volume -= 0.1);
+      volume_properties.decreaseVolume(0.1);
     }
     if (character == KEY_F(4))
     {
-      Audio::setVolume(current_track.ref(), current_volume += 0.1);
+      volume_properties.increaseVolume(0.1);
     }
     if (character == KEY_F(5))
     {
