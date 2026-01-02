@@ -2,19 +2,7 @@
 
 #include <miniaudio/miniaudio.h>
 
-namespace Audio
+namespace Audio 
 {
-class Volume
-{
-public:
-  Volume(ma_sound &sound);
-
-  auto increaseVolume() noexcept -> float;
-  auto decreaseVolume() noexcept -> float;
-
-private:
-  ma_sound &sound_instance_;
-  float current_volume_{0.5f};
-  float volume_increment_{0.1f};
-};
-} // namespace Audio
+  auto setVolume(ma_sound& sound, float volume = 0.3) -> void;
+}

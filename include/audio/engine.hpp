@@ -1,25 +1,21 @@
-#pragma once
+#pragma once 
 
-#include <memory>
 #include <miniaudio/miniaudio.h>
 
-namespace Audio
+namespace Audio 
 {
-class Engine
-{
-public:
-  Engine();
-  ~Engine();
+  class Engine 
+  {
+    private:
+      ma_engine engine_ {};
 
-  Engine(const Engine &other) = default;
-  Engine &operator=(const Engine &other) = default;
-  Engine(Engine &&other) noexcept = default;
-  Engine &operator=(Engine &&other) noexcept = default;
-
-  auto ref() noexcept -> ma_engine&;
-  auto cref() const noexcept -> const ma_engine&;
-
-private:
-  ma_engine engine_{};
-};
-} // namespace Audio
+      auto CreateEngine() -> ma_engine;
+    
+    public:
+      Engine();
+      ~Engine();
+      
+      auto cref() const noexcept -> const ma_engine&;
+      auto ref() noexcept -> ma_engine&;
+  };
+}
