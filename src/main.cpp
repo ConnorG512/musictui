@@ -5,7 +5,7 @@
 #include "audio/track-properties.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
-#include "read-directory.hpp"
+#include "filesystem/directory-utils.hpp"
 
 #include <array>
 #include <cassert>
@@ -28,26 +28,15 @@ auto main(int argc, const char *argv[]) -> int
   // Enabling all localisation
   setlocale(LC_ALL, "");
   
-  std::vector<std::string> track_list{};
-  track_list.reserve(3);
-
-  // Directory
-  Directory opened_directory{argv[1]};
-  
-  auto found_tracks {opened_directory.GetDirectoryContents()};
+  auto found_tracks {Filesystem::GetFilePaths(argv[1])};
   if(found_tracks.empty())
     std::runtime_error("Song list empty!");
-
-  for(const auto track : found_tracks)
-  {
-    track_list.emplace_back(std::format("{}{}", argv[1], track)); 
-  }
 
   // Audio
   Audio::Engine audio_engine{};
 
   int current_track_index {2};
-  Audio::PlayingSound current_track {audio_engine.ref(), track_list.at(current_track_index).c_str()};
+  Audio::PlayingSound current_track {audio_engine.ref(), found_tracks.at(current_track_index).c_str()};
   Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
   Audio::Properties current_track_properties{current_track.ref()};
 
@@ -67,7 +56,7 @@ auto main(int argc, const char *argv[]) -> int
       {0, getmaxy(stdscr) / 8}
   };
   
-  UI::Text::drawVerticalStringList(contents_window.ptr(), track_list, {1,10});
+  UI::Text::drawVerticalStringList(contents_window.ptr(), found_tracks, {1,10});
   
   auto character{0};
   while ((character = getch()) != 'q')
@@ -104,18 +93,18 @@ auto main(int argc, const char *argv[]) -> int
     if (character == 'k')
     {
       current_track_index += 1;
-      if(current_track_index > track_list.size() - 1)
+      if(current_track_index > found_tracks.size() - 1)
         current_track_index -= 1;
-      current_track.resetSound(track_list.at(current_track_index).c_str());
-      std::println("Current track: {}", track_list.at(current_track_index));
+      current_track.resetSound(found_tracks.at(current_track_index).c_str());
+      std::println("Current track: {}", found_tracks.at(current_track_index));
     }
     if (character == 'j')
     {
       current_track_index -= 1;
       if(current_track_index < 0)
         current_track_index += 1;
-      current_track.resetSound(track_list.at(current_track_index).c_str());
-      std::println("Current track: {}", track_list.at(current_track_index));
+      current_track.resetSound(found_tracks.at(current_track_index).c_str());
+      std::println("Current track: {}", found_tracks.at(current_track_index));
     }
     refresh();
   }
