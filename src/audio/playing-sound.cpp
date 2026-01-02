@@ -31,10 +31,11 @@ auto Audio::PlayingSound::clearSound() noexcept -> void
   ma_sound_uninit(&sound_instance_);
 }
 
-auto Audio::PlayingSound::resetSound(const char* file_path)
+auto Audio::PlayingSound::resetSound(const char* file_path) -> void
 {
   assert(file_path != nullptr);
   
+  ma_sound_stop(&sound_instance_);
   clearSound();
   sound_instance_ = CreateSound(engine_, file_path);
 }

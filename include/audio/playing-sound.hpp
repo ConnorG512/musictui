@@ -17,7 +17,7 @@ namespace Audio
       ~PlayingSound();
       
       auto clearSound() noexcept -> void;
-      auto resetSound(const char* file_path);
+      auto resetSound(const char* file_path) -> void;
       
       auto ref() noexcept -> ma_sound&;
       auto cref() const noexcept -> const ma_sound&;
