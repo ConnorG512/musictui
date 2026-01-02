@@ -112,7 +112,7 @@ auto main(int argc, const char *argv[]) -> int
     if (character == 'j')
     {
       current_track_index -= 1;
-      if(current_track_index < 2)
+      if(current_track_index < 0)
         current_track_index += 1;
       current_track.resetSound(track_list.at(current_track_index).c_str());
       std::println("Current track: {}", track_list.at(current_track_index));
