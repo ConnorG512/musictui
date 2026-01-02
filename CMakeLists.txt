@@ -10,7 +10,7 @@ set(SOURCE_FILES
   src/main.cpp
   src/audio/engine.cpp
   src/audio/playing-sound.cpp
-  src/audio/volume.cpp
+  src/audio/volume-handler.cpp
   src/audio/playback.cpp
   src/audio/track-properties.cpp
   src/ui/window.cpp
