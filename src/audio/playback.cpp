@@ -18,3 +18,14 @@ auto Audio::Playback::stopPlayback(ma_sound& sound) -> void
     throw std::runtime_error(std::format("Failed to stop sound! Error {}", static_cast<int>(result)));
   }
 }
+
+auto Audio::Playback::seekForward(ma_sound& sound, ma_uint32 sample_rate) noexcept -> void
+{
+  ma_uint64 track_cursor{};
+  ma_sound_get_cursor_in_pcm_frames(&sound, &track_cursor);
+}
+
+auto Audio::Playback::seekBackward(ma_sound& sound, ma_uint32 sample_rate) noexcept -> void 
+{
+
+}
