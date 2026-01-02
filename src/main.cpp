@@ -1,10 +1,11 @@
-#include "audio/device.hpp"
 #include "audio/engine.hpp"
-#include "audio/volume.hpp"
-#include "track_instance.hpp"
+#include "audio/playing-sound.hpp"
+#include "audio/volume-handler.hpp"
+#include "audio/playback.hpp"
+#include "audio/track-properties.hpp"
 #include "ui/window.hpp"
 #include "ui/text-output.hpp"
-#include "read-directory.hpp"
+#include "filesystem/directory-utils.hpp"
 
 #include <array>
 #include <cassert>
@@ -27,30 +28,18 @@ auto main(int argc, const char *argv[]) -> int
   // Enabling all localisation
   setlocale(LC_ALL, "");
   
-  std::vector<std::string> track_list{};
-  track_list.reserve(3);
-
-  // Directory
-  Directory opened_directory{argv[1]};
-  
-  auto found_tracks {opened_directory.GetDirectoryContents()};
+  auto found_tracks {Filesystem::GetFilePaths(argv[1])};
   if(found_tracks.empty())
     std::runtime_error("Song list empty!");
 
-  for(const auto track : found_tracks)
-  {
-    track_list.emplace_back(std::format("{}{}", argv[1], track)); 
-  }
-
   // Audio
-  Audio::Device device{};
   Audio::Engine audio_engine{};
 
-  TrackInstance playing_track(track_list.at(2).c_str(), audio_engine);
+  int current_track_index {0};
+  Audio::PlayingSound current_track {audio_engine.ref(), found_tracks.at(current_track_index).c_str()};
+  Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
+  Audio::Properties current_track_properties{current_track.ref()};
 
-  // Play sound
-  ma_sound_start(&playing_track.ref());
-  
   // Main Loop:
   initscr();
   keypad(stdscr, TRUE);
@@ -59,44 +48,62 @@ auto main(int argc, const char *argv[]) -> int
   //start_color();
   
   refresh();
-  UI::Window playback_window{std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
-  UI::Window contents_window{std::optional<std::pair<int, int>>(
+  UI::Window playback_window
+  {
+    std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})
+  };
+  UI::Window contents_window{
+    std::optional<std::pair<int, int>>(
       {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
       {0, getmaxy(stdscr) / 8}
   };
   
-  UI::Text::drawVerticalStringList(contents_window.ptr(), track_list, {1,10});
+  UI::Text::drawVerticalStringList(contents_window.ptr(), found_tracks, {1,10});
   
   auto character{0};
   while ((character = getch()) != 'q')
   {
     if (character == KEY_F(1))
     {
-      playing_track.track_volume.decreaseVolume();
+      Audio::Playback::startPlayback(current_track.ref());
     }
     if (character == KEY_F(2))
     {
-      playing_track.track_volume.increaseVolume();
+      Audio::Playback::stopPlayback(current_track.ref());
     }
     if (character == KEY_F(3))
     {
-      playing_track.pauseTrack();
+      volume_properties.decreaseVolume(0.1);
     }
     if (character == KEY_F(4))
     {
-      playing_track.playTrack();
+      volume_properties.increaseVolume(0.1);
     }
     if (character == KEY_F(5))
     {
-      playing_track.seekBackward();
+      Audio::Playback::seekBackward(
+          current_track.ref(), current_track_properties.sample_rate);
     }
     if (character == KEY_F(6))
     {
-      playing_track.seekForward();
+      Audio::Playback::seekForward(
+          current_track.ref(), current_track_properties.sample_rate);
     }
     if (character == KEY_F(7))
     {
-      playing_track.stopTrack();
+    }
+    if (character == 'k')
+    {
+      //current_track_index += 1;
+      //if(current_track_index > found_tracks.size() - 1)
+      //  current_track_index = found_tracks.size() - 1;
+      //current_track.resetSound(found_tracks.at(current_track_index).c_str());
+      //std::println("Current track: {}", found_tracks.at(current_track_index));
+    }
+    if (character == 'j')
+    {
+      current_track_index += 1;
+      current_track.resetSound(found_tracks.at(current_track_index % found_tracks.size()).c_str());
     }
     refresh();
   }
