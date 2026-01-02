@@ -35,7 +35,7 @@ auto main(int argc, const char *argv[]) -> int
   // Audio
   Audio::Engine audio_engine{};
 
-  int current_track_index {2};
+  int current_track_index {0};
   Audio::PlayingSound current_track {audio_engine.ref(), found_tracks.at(current_track_index).c_str()};
   Audio::VolumeHandler volume_properties(current_track.ref(), 0.3);
   Audio::Properties current_track_properties{current_track.ref()};
@@ -48,8 +48,10 @@ auto main(int argc, const char *argv[]) -> int
   //start_color();
   
   refresh();
-  UI::Window playback_window{
-    std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})};
+  UI::Window playback_window
+  {
+    std::optional<std::pair<int, int>>({getmaxx(stdscr), getmaxy(stdscr) / 8})
+  };
   UI::Window contents_window{
     std::optional<std::pair<int, int>>(
       {getmaxx(stdscr), getmaxy(stdscr) / 8 * 7}),
@@ -92,19 +94,16 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == 'k')
     {
-      current_track_index += 1;
-      if(current_track_index > found_tracks.size() - 1)
-        current_track_index -= 1;
-      current_track.resetSound(found_tracks.at(current_track_index).c_str());
-      std::println("Current track: {}", found_tracks.at(current_track_index));
+      //current_track_index += 1;
+      //if(current_track_index > found_tracks.size() - 1)
+      //  current_track_index = found_tracks.size() - 1;
+      //current_track.resetSound(found_tracks.at(current_track_index).c_str());
+      //std::println("Current track: {}", found_tracks.at(current_track_index));
     }
     if (character == 'j')
     {
-      current_track_index -= 1;
-      if(current_track_index < 0)
-        current_track_index += 1;
-      current_track.resetSound(found_tracks.at(current_track_index).c_str());
-      std::println("Current track: {}", found_tracks.at(current_track_index));
+      current_track_index += 1;
+      current_track.resetSound(found_tracks.at(current_track_index % found_tracks.size()).c_str());
     }
     refresh();
   }

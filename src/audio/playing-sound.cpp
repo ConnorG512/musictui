@@ -6,24 +6,24 @@
 
 Audio::PlayingSound::PlayingSound(ma_engine& engine, const char* file_path)
   : engine_{engine}
-  , sound_instance_{CreateSound(engine_, file_path)} {}
+{
+  createSound(engine_, file_path);
+}
 
 Audio::PlayingSound::~PlayingSound()
 {
   clearSound();
 }
 
-auto Audio::PlayingSound::CreateSound(ma_engine& engine, const char* file_path) const -> ma_sound
-{
+auto Audio::PlayingSound::createSound(ma_engine& engine, const char* file_path) -> void
+{ 
   assert(file_path != nullptr);
-  ma_sound sound {};
 
-  if(const auto result = ma_sound_init_from_file(&engine, file_path, 0, nullptr, nullptr, &sound);
+  if(const auto result = ma_sound_init_from_file(&engine, file_path, 0, nullptr, nullptr, &sound_instance_);
       result != MA_SUCCESS)
   {
     throw std::runtime_error("Failed to create sound instance from file!");
   }
-  return sound;
 }
 
 auto Audio::PlayingSound::clearSound() noexcept -> void
@@ -37,7 +37,7 @@ auto Audio::PlayingSound::resetSound(const char* file_path) -> void
   
   ma_sound_stop(&sound_instance_);
   clearSound();
-  sound_instance_ = CreateSound(engine_, file_path);
+  createSound(engine_, file_path);
 }
 
 auto Audio::PlayingSound::ref() noexcept -> ma_sound&
