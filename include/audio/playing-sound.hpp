@@ -10,13 +10,13 @@ namespace Audio
       ma_engine& engine_;
       ma_sound sound_instance_{};
 
-      auto CreateSound(ma_engine& engine, const char* file_path) const -> ma_sound;
+      auto createSound(ma_engine& engine, const char* file_path) -> void;
+      auto clearSound() noexcept -> void;
 
     public:
       PlayingSound(ma_engine& engine, const char* file_path);
       ~PlayingSound();
       
-      auto clearSound() noexcept -> void;
       auto resetSound(const char* file_path) -> void;
       
       auto ref() noexcept -> ma_sound&;

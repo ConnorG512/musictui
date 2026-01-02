@@ -14,7 +14,7 @@ set(SOURCE_FILES
   src/audio/playback.cpp
   src/audio/track-properties.cpp
   src/ui/window.cpp
-  src/read-directory.cpp
+  src/filesystem/directory-utils.cpp
 )
 
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
