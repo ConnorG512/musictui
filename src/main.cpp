@@ -95,11 +95,10 @@ auto main(int argc, const char *argv[]) -> int
     }
     if (character == 'k')
     {
-      //current_track_index += 1;
-      //if(current_track_index > found_tracks.size() - 1)
-      //  current_track_index = found_tracks.size() - 1;
-      //current_track.resetSound(found_tracks.at(current_track_index).c_str());
-      //std::println("Current track: {}", found_tracks.at(current_track_index));
+      current_track_index -= 1;
+      current_track.resetSound(found_tracks.at(current_track_index % found_tracks.size()).c_str());
+      UI::Text::drawAtPosition(playback_window.ptr(), found_tracks.at(current_track_index % found_tracks.size()), {2,2});
+      playback_window.eraseWindow();
     }
     if (character == 'j')
     {
