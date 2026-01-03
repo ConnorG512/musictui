@@ -59,6 +59,7 @@ auto main(int argc, const char *argv[]) -> int
   };
   
   UI::Text::drawVerticalStringList(contents_window.ptr(), found_tracks, {1,10});
+  UI::Text::drawAtPosition(playback_window.ptr(), found_tracks.at(current_track_index), {2,2});
   
   auto character{0};
   while ((character = getch()) != 'q')
@@ -104,8 +105,9 @@ auto main(int argc, const char *argv[]) -> int
     {
       current_track_index += 1;
       current_track.resetSound(found_tracks.at(current_track_index % found_tracks.size()).c_str());
+      UI::Text::drawAtPosition(playback_window.ptr(), found_tracks.at(current_track_index % found_tracks.size()), {2,2});
+      werase(playback_window.ptr());
     }
-    refresh();
   }
 
   endwin();
