@@ -106,7 +106,7 @@ auto main(int argc, const char *argv[]) -> int
       current_track_index += 1;
       current_track.resetSound(found_tracks.at(current_track_index % found_tracks.size()).c_str());
       UI::Text::drawAtPosition(playback_window.ptr(), found_tracks.at(current_track_index % found_tracks.size()), {2,2});
-      werase(playback_window.ptr());
+      playback_window.eraseWindow();
     }
   }
 

@@ -15,6 +15,7 @@ private:
       ) noexcept
       -> std::unique_ptr<WINDOW, decltype(&delwin)>;
 
+  auto drawBox() noexcept -> void;
   std::unique_ptr<WINDOW, decltype(&delwin)> window_instance_{createBoxedWindow(std::nullopt, {0,0})};
 
 public:
@@ -22,8 +23,8 @@ public:
          const std::pair<int, int> position_xy = {0,0});
 
   auto refreshWindow() const noexcept -> void;
-  auto eraseWindow() const noexcept -> void;
-  auto clearWindow() const noexcept -> void;
+  auto eraseWindow() noexcept -> void;
+  auto clearWindow() noexcept -> void;
   
   auto ptr() const noexcept -> WINDOW*;
   auto cptr() const noexcept -> const WINDOW*;
