@@ -8,7 +8,23 @@ UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy, std::
   refreshWindow();
 }
 
-auto UI::Window::refreshWindow() const noexcept -> void { wrefresh(window_instance_.get()); }
+auto UI::Window::refreshWindow() const noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  wrefresh(window_instance_.get()); 
+}
+
+auto UI::Window::eraseWindow() const noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  werase(window_instance_.get()); 
+}
+
+auto UI::Window::clearWindow() const noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  wclear(window_instance_.get()); 
+}
 
 auto UI::Window::ptr() const noexcept -> WINDOW* 
 {
