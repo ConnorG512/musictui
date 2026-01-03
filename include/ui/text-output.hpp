@@ -15,12 +15,12 @@ namespace UI
   
   namespace Text
   {
-    struct Properties 
+    auto drawAtPosition(WINDOW* window_instance, const std::string& string, std::pair<int, int> xy)
     {
-      std::span<std::string> strings{};
-      std::span<std::pair<int, int>> xy_positions {};
-      std::optional<int> color {std::nullopt};
-    };
+      const auto& [x_pos, y_pos] = xy;
+      mvprintw(y_pos, x_pos, "%s", string.c_str());
+      wrefresh(window_instance);
+    }
 
     auto drawVerticalStringList(
         WINDOW* window_instance, std::span<const std::string> string_list, std::pair<int,int> xy) noexcept -> void
