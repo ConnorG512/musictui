@@ -8,7 +8,25 @@ UI::Window::Window(const std::optional<std::pair<int, int>> dimensions_xy, std::
   refreshWindow();
 }
 
-auto UI::Window::refreshWindow() const noexcept -> void { wrefresh(window_instance_.get()); }
+auto UI::Window::refreshWindow() const noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  wrefresh(window_instance_.get()); 
+}
+
+auto UI::Window::eraseWindow() noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  werase(window_instance_.get()); 
+  drawBox();
+}
+
+auto UI::Window::clearWindow() noexcept -> void 
+{ 
+  assert(window_instance_.get() != nullptr);
+  wclear(window_instance_.get()); 
+  drawBox();
+}
 
 auto UI::Window::ptr() const noexcept -> WINDOW* 
 {
@@ -20,6 +38,11 @@ auto UI::Window::cptr() const noexcept -> const WINDOW*
 {
   assert(window_instance_.get() != nullptr);
   return window_instance_.get();
+}
+
+auto UI::Window::drawBox() noexcept -> void 
+{
+  box(window_instance_.get(), 0, 0);
 }
 
 auto UI::Window::createBoxedWindow(const std::optional<std::pair<int, int>> dimensions_xy,
